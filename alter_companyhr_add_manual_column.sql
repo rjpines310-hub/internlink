@@ -1,0 +1,2 @@
+ALTER TABLE companyhr
+ADD COLUMN manual VARCHAR(5) DEFAULT 'no';

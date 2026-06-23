@@ -1,0 +1,318 @@
+<!-- Improved Messaging Section for student.php -->
+<div class="tab-content" id="messageContent">
+  <div class="messaging-container">
+    <!-- Conversations List -->
+    <div class="conversations-list">
+      <div class="conversations-header">
+        <h3>Messages</h3>
+        <button class="new-chat-btn" id="newChatBtn">New Chat</button>
+      </div>
+      <div class="conversations-body">
+        <div id="conversations">
+          <div class="loading">Loading conversations...</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Chat Area -->
+    <div class="chat-area">
+      <div class="chat-header">
+        <button class="back-to-conversations" onclick="showConversationsList()">← Back</button>
+        <h3 id="chat-title">Select a conversation</h3>
+        <div class="chat-actions">
+          <!-- Future: Add video call, phone call buttons here -->
+        </div>
+      </div>
+      
+      <div class="messages" id="messages">
+        <div class="no-conversation-selected">
+          <div style="text-align: center; color: #666; padding: 40px;">
+            <h4>Welcome to Messages</h4>
+            <p>Select a conversation from the left to start chatting, or click "New Chat" to start a new conversation.</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="message-input">
+        <input 
+          type="text" 
+          id="messageText" 
+          placeholder="Type a message..." 
+          maxlength="500"
+          disabled
+        >
+        <button id="sendBtn" disabled>Send</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- New Chat Modal -->
+<div id="newChatModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3>Start New Conversation</h3>
+      <button class="close-modal" onclick="hideNewChatModal()">&times;</button>
+    </div>
+    <div class="modal-body">
+      <input 
+        type="text" 
+        id="userSearchInput" 
+        class="search-input" 
+        placeholder="Search for faculty, supervisors, or companies..."
+        autocomplete="off"
+      >
+      <div id="searchResults" class="search-results">
+        <div class="search-placeholder">
+          Type at least 2 characters to search for users
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Additional styles that should be added to your existing CSS -->
+<style>
+/* Add these styles to your student.css or include messaging_improved.css */
+
+/* Loading animation */
+.loading {
+  text-align: center;
+  padding: 20px;
+  color: #666;
+  font-style: italic;
+}
+
+.loading::after {
+  content: '';
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #f3f3f3;
+  border-top: 2px solid #116530;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-left: 10px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.search-placeholder {
+  text-align: center;
+  color: #999;
+  padding: 20px;
+  font-style: italic;
+  font-size: 0.9rem;
+}
+
+.no-conversation-selected {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  background: #f8f9fa;
+}
+
+/* Message status indicators */
+.message-status {
+  font-size: 0.7rem;
+  color: #666;
+  margin-top: 2px;
+}
+
+.message-status.delivered {
+  color: #28a745;
+}
+
+.message-status.read {
+  color: #007bff;
+}
+
+/* Typing indicator */
+.typing-indicator {
+  display: flex;
+  align-items: center;
+  padding: 10px 16px;
+  color: #666;
+  font-style: italic;
+  font-size: 0.9rem;
+}
+
+.typing-dots {
+  display: inline-flex;
+  gap: 2px;
+  margin-left: 5px;
+}
+
+.typing-dots span {
+  width: 4px;
+  height: 4px;
+  background: #666;
+  border-radius: 50%;
+  animation: typing 1.4s infinite ease-in-out;
+}
+
+.typing-dots span:nth-child(1) { animation-delay: -0.32s; }
+.typing-dots span:nth-child(2) { animation-delay: -0.16s; }
+
+@keyframes typing {
+  0%, 80%, 100% { transform: scale(0); opacity: 0.5; }
+  40% { transform: scale(1); opacity: 1; }
+}
+
+/* Error states */
+.error-message {
+  background: #f8d7da;
+  color: #721c24;
+  padding: 10px 15px;
+  border-radius: 6px;
+  margin: 10px 0;
+  border: 1px solid #f5c6cb;
+  font-size: 0.9rem;
+}
+
+.success-message {
+  background: #d4edda;
+  color: #155724;
+  padding: 10px 15px;
+  border-radius: 6px;
+  margin: 10px 0;
+  border: 1px solid #c3e6cb;
+  font-size: 0.9rem;
+}
+
+/* Connection status */
+.connection-status {
+  padding: 8px 15px;
+  text-align: center;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.connection-status.online {
+  background: #d4edda;
+  color: #155724;
+}
+
+.connection-status.offline {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+/* Enhanced mobile responsiveness */
+@media (max-width: 768px) {
+  .messaging-container {
+    position: relative;
+  }
+  
+  .conversations-list.mobile-hidden {
+    display: none;
+  }
+  
+  .chat-area.mobile-hidden {
+    display: none;
+  }
+  
+  .conversations-list,
+  .chat-area {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+  }
+}
+</style>
+
+<!-- JavaScript Integration -->
+<script>
+// Enhanced showTab function to handle messaging initialization
+function showTab(tabId) {
+  hideAllTabsExcept(tabId);
+
+  const tab = document.getElementById(tabId);
+  if (!tab) return;
+
+  // Restricted tabs for pending students
+  const restrictedTabs = ["logAttendanceContent", "performanceContent", "fileSubmissionsContent"];
+
+  // Remove any previous warning messages first
+  const prevWarning = tab.querySelector('.pending-warning');
+  if (prevWarning) prevWarning.remove();
+
+  if (employmentStatus === "pending" && restrictedTabs.includes(tabId)) {
+    // Clear the content and show only the warning
+    tab.innerHTML = `
+      <h2>${tab.querySelector('h2') ? tab.querySelector('h2').textContent : ''}</h2>
+      <p class="pending-warning" style="color: red; font-weight: bold; margin-top: 15px;">
+        You must apply first as an intern to access this section.
+      </p>
+    `;
+    return;
+  }
+
+  // Load file submissions when accessing the file submissions tab
+  if (tabId === "fileSubmissionsContent") {
+    loadFileSubmissions();
+  }
+
+  if (tabId === "myApplicationsContent") {
+    loadMyApplications();
+  }
+
+  // Enhanced messaging initialization
+  if (tabId === "messageContent") {
+    // Clean up any existing messaging state
+    if (typeof cleanupMessaging === 'function') {
+      cleanupMessaging();
+    }
+    
+    // Initialize messaging with improved functionality
+    setTimeout(() => {
+      if (typeof initializeMessaging === 'function') {
+        initializeMessaging();
+      } else {
+        // Fallback to original messaging functions
+        loadConversations();
+      }
+    }, 100);
+  } else {
+    // Clean up messaging when leaving the tab
+    if (typeof cleanupMessaging === 'function') {
+      cleanupMessaging();
+    }
+  }
+}
+
+// Enhanced mobile support for messaging
+function toggleMobileChat() {
+  const conversationsList = document.querySelector('.conversations-list');
+  const chatArea = document.querySelector('.chat-area');
+  
+  if (window.innerWidth <= 768) {
+    conversationsList.classList.toggle('mobile-hidden');
+    chatArea.classList.toggle('mobile-hidden');
+  }
+}
+
+// Close modal when clicking outside
+window.onclick = function(event) {
+  const modal = document.getElementById('newChatModal');
+  if (event.target === modal) {
+    hideNewChatModal();
+  }
+}
+
+// Handle window resize for mobile responsiveness
+window.addEventListener('resize', function() {
+  if (window.innerWidth > 768) {
+    const conversationsList = document.querySelector('.conversations-list');
+    const chatArea = document.querySelector('.chat-area');
+    if (conversationsList) conversationsList.classList.remove('mobile-hidden');
+    if (chatArea) chatArea.classList.remove('mobile-hidden');
+  }
+});
+</script>

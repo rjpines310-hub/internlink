@@ -1,0 +1,73 @@
+/* Specific styling for announcement display cards */
+.announcement-display-card {
+  /* background: rgba(255, 255, 255, 0.95); */ /* Removed background */
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(17, 101, 48, 0.1);
+  padding: 20px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease;
+  text-align: left;
+  border: 1px solid rgba(17, 101, 48, 0.1);
+  position: relative;
+  overflow: visible;
+  min-height: auto;
+  margin-bottom: 20px; /* Add some spacing between announcement cards */
+}
+
+
+.announcement-display-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(17, 101, 48, 0.15);
+  border-color: rgba(17, 101, 48, 0.2);
+}
+
+.announcement-display-card h4 {
+  margin: 0 0 12px 0;
+  color: #116530;
+  font-size: 1.3rem;
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: -0.3px;
+}
+
+.announcement-display-card p {
+  margin: 5px 0;
+  font-size: 0.95rem;
+  color: #333;
+  line-height: 1.5;
+}
+
+.announcement-display-card p strong {
+  color: #116530;
+}
+
+.announcement-display-card .company-card-buttons {
+  margin-top: 15px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.announcement-display-card .action-btn {
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #116530 0%, #28a745 100%);
+  color: white;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 10px rgba(17, 101, 48, 0.2);
+}
+
+.announcement-display-card .action-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(17, 101, 48, 0.3);
+}
+
+.announcement-display-card .action-btn.secondary {
+  background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
+}

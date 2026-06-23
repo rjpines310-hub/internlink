@@ -1,0 +1,114 @@
+  /* OJT Hours Tab Styles */
+.section-hours-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Changed to auto-fill for consistency */
+  gap: 20px;
+  /* Removed justify-items: center; to align cards to start */
+  width: 100%; /* Ensure grid takes full width */
+  max-width: 900px; /* Added max-width for consistency with other grids */
+  margin: 0 auto; /* Center the grid */
+}
+
+.section-card {
+  background: rgba(255, 255, 255, 0.9); /* Consistent background */
+  border: 1px solid rgba(17, 101, 48, 0.1); /* Consistent border */
+  border-radius: 12px; /* Consistent border-radius */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1); /* Consistent box-shadow */
+  padding: 15px; /* Consistent padding */
+  width: 100%;
+  /* Removed max-width: 300px; to let grid handle width */
+  box-sizing: border-box;
+  display: flex; /* Consistent flex properties */
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out; /* Consistent transitions */
+  cursor: pointer; /* Consistent cursor */
+}
+
+.section-card:hover {
+  transform: translateY(-5px); /* Consistent hover effect */
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2); /* Consistent hover shadow */
+}
+
+.section-card h3 {
+  margin-top: 0;
+  color: #116530;
+}
+
+.section-card .form-row {
+  margin-bottom: 15px;
+}
+
+.section-card .form-row label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.section-card .input-container {
+  display: flex;
+  align-items: center;
+  gap: 5px; /* Reduced gap between input and icon */
+  max-width: 100px; /* Set a max-width for the container */
+}
+
+.section-card .input-container input[type="number"] {
+  width: 60px; /* Increased width to make it a little longer */
+  padding: 4px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  flex-grow: 0;
+  flex-shrink: 0;
+  box-sizing: border-box;
+}
+
+.section-card .edit-icon {
+  margin-left: 0; /* Removed margin-left as gap is now on container */
+  cursor: pointer;
+  color: #116530;
+  font-size: 0.9em; /* Further reduced font size */
+  padding: 3px; /* Further reduced padding */
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  background: rgba(17, 101, 48, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px; /* Further reduced width */
+  height: 24px; /* Further reduced height */
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+
+.section-card .action-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+.section-card .save-btn {
+  background-color: #116530;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.section-card .save-btn:hover {
+  background-color: #0e5128;
+}
+
+.section-card .cancel-btn {
+  background-color: #ccc;
+  color: #333;
+  border: 1px solid #bbb;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.section-card .cancel-btn:hover {
+  background-color: #bbb;
+}
