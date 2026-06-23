@@ -1,0 +1,44 @@
+[02-Oct-2025 01:44:47 Europe/Berlin] PHP Fatal error:  Uncaught ArgumentCountError: The number of elements in the type definition string must match the number of bind variables in C:\xampp\htdocs\capstone\timecard_action.php:135
+Stack trace:
+#0 C:\xampp\htdocs\capstone\timecard_action.php(135): mysqli_stmt->bind_param('ississdd', 1000, '2025-10-02', '2025-10-02 01:4...', 21, '', 14.572406549073, 121.00823983956)
+#1 {main}
+  thrown in C:\xampp\htdocs\capstone\timecard_action.php on line 135
+[02-Oct-2025 01:45:21 Europe/Berlin] PHP Fatal error:  Uncaught ArgumentCountError: The number of elements in the type definition string must match the number of bind variables in C:\xampp\htdocs\capstone\timecard_action.php:135
+Stack trace:
+#0 C:\xampp\htdocs\capstone\timecard_action.php(135): mysqli_stmt->bind_param('ississdd', 1000, '2025-10-02', '2025-10-02 01:4...', 21, '', 14.572406549073, 121.00823983956)
+#1 {main}
+  thrown in C:\xampp\htdocs\capstone\timecard_action.php on line 135
+[02-Oct-2025 01:45:40 Europe/Berlin] Timecard action: student_id=1000, action=timein, location_id=21, lat=14.572406549073, lng=121.00823983956
+[02-Oct-2025 01:45:40 Europe/Berlin] PHP Fatal error:  Uncaught ArgumentCountError: The number of elements in the type definition string must match the number of bind variables in C:\xampp\htdocs\capstone\timecard_action.php:138
+Stack trace:
+#0 C:\xampp\htdocs\capstone\timecard_action.php(138): mysqli_stmt->bind_param('ississdd', 1000, '2025-10-02', '2025-10-02 01:4...', 21, '', 14.572406549073, 121.00823983956)
+#1 {main}
+  thrown in C:\xampp\htdocs\capstone\timecard_action.php on line 138
+[02-Oct-2025 01:46:05 Europe/Berlin] Timecard action: student_id=1000, action=timein, location_id=21, lat=14.572406549073, lng=121.00823983956
+[02-Oct-2025 01:47:30 Europe/Berlin] Timecard action: student_id=1000, action=timein, location_id=21, lat=14.572269018455, lng=121.00827153176
+[02-Oct-2025 01:49:51 Europe/Berlin] Timecard action: student_id=1000, action=timein, location_id=21, lat=14.572406549073, lng=121.00823983956
+[02-Oct-2025 02:01:36 Europe/Berlin] Timecard action: student_id=1000, action=timein, location_id=21, lat=14.572320780472, lng=121.00825730236
+[02-Oct-2025 02:02:18 Europe/Berlin] Timecard action: student_id=1000, action=timein, location_id=21, lat=14.572406549073, lng=121.00823983956
+[02-Oct-2025 02:02:40 Europe/Berlin] Timecard action: student_id=1000, action=timeout, location_id=21, lat=14.572406549073, lng=121.00823983956
+[02-Oct-2025 02:14:24 Europe/Berlin] Timecard action: student_id=1000, action=timein, location_id=21, lat=14.572406549073, lng=121.00823983956
+[02-Oct-2025 02:34:32 Europe/Berlin] Timecard action: student_id=1000, action=time_in, location_id=21, lat=14.5720265, lng=121.0083235
+[02-Oct-2025 02:35:41 Europe/Berlin] Timecard action: student_id=1000, action=timein, location_id=21, lat=14.572269018455, lng=121.00827153176
+[02-Oct-2025 02:35:41 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'photo_path' in 'field list' in C:\xampp\htdocs\capstone\timecard_action.php:140
+Stack trace:
+#0 C:\xampp\htdocs\capstone\timecard_action.php(140): mysqli->prepare('INSERT INTO tim...')
+#1 {main}
+  thrown in C:\xampp\htdocs\capstone\timecard_action.php on line 140
+[02-Oct-2025 02:37:11 Europe/Berlin] Timecard action: student_id=1000, action=timein, location_id=21, lat=14.572269018455, lng=121.00827153176
+[02-Oct-2025 02:37:35 Europe/Berlin] Timecard action: student_id=1000, action=timeout, location_id=21, lat=14.572269018455, lng=121.00827153176
+[02-Oct-2025 08:44:58 Asia/Manila] Timecard action: student_id=1000, action=timein, location_id=21, lat=14.572406549073, lng=121.00823983956
+[02-Oct-2025 08:45:05 Asia/Manila] Timecard action: student_id=1000, action=timeout, location_id=21, lat=14.572406549073, lng=121.00823983956
+[19-Oct-2025 12:40:50 Asia/Manila] Timecard action: student_id=1000, action=timein, location_id=26, lat=14.572406549073, lng=121.00823983956
+[19-Oct-2025 12:41:09 Asia/Manila] Timecard action: student_id=1000, action=timeout, location_id=26, lat=14.572406549073, lng=121.00823983956
+[24-Oct-2025 21:16:00 Asia/Manila] Timecard action: student_id=142, action=timein, location_id=1, lat=14.571508458191, lng=121.00814779636
+[24-Oct-2025 21:16:10 Asia/Manila] Timecard action: student_id=142, action=timeout, location_id=1, lat=14.571508458191, lng=121.00814779636
+[25-Oct-2025 10:19:05 Asia/Manila] Timecard action: student_id=143, action=timein, location_id=3, lat=14.592124572961, lng=120.98150350215
+[25-Oct-2025 10:19:18 Asia/Manila] Timecard action: student_id=143, action=timeout, location_id=3, lat=14.592124572961, lng=120.98150350215
+[25-Oct-2025 16:15:50 Asia/Manila] Timecard action: student_id=144, action=timein, location_id=5, lat=14.591990475734, lng=120.98159162722
+[25-Oct-2025 16:20:43 Asia/Manila] Timecard action: student_id=144, action=timeout, location_id=5, lat=14.591990475734, lng=120.98159162722
+[26-Nov-2025 14:10:19 Asia/Manila] Timecard action: student_id=145, action=timein, location_id=6, lat=17.6128, lng=120.6124544
+[26-Nov-2025 14:10:28 Asia/Manila] Timecard action: student_id=145, action=timeout, location_id=6, lat=17.6128, lng=120.6124544

@@ -1,0 +1,672 @@
+/* General layout for the file submissions tab */
+#fileSubmissionsContent {
+    padding: 30px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 255, 248, 0.95) 100%);
+    border-radius: 20px;
+    overflow-y: auto;
+    height: auto;
+    min-height: calc(100vh - 200px);
+    color: #1e293b;
+    font-family: 'Inter', sans-serif;
+    box-shadow: 0 10px 30px rgba(17, 101, 48, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(17, 101, 48, 0.1);
+    scroll-behavior: smooth;
+    scrollbar-width: thin;
+    scrollbar-color: #116530 #f1f1f1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Styles for search and filter bars - moved from faculty.php */
+.performance-controls,
+.file-submission-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 20px;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 800px; /* Adjust as needed */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.performance-controls input[type="text"],
+.performance-controls select,
+.file-submission-controls input[type="text"],
+.file-submission-controls select {
+  flex-grow: 1;
+  padding: 10px 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  min-width: 150px; /* Ensure inputs don't get too small */
+}
+
+.performance-controls input[type="text"]:focus,
+.performance-controls select:focus,
+.file-submission-controls input[type="text"]:focus,
+.file-submission-controls select:focus {
+  border-color: #116530;
+  box-shadow: 0 0 0 3px rgba(17, 101, 48, 0.2);
+  outline: none;
+}
+
+/* Specific adjustments for file submissions student list search/filter */
+.file-submission-controls {
+    flex-direction: column; /* Stack search and filter vertically in student list */
+    align-items: stretch;
+    max-width: none; /* Allow it to take full width of its parent */
+    margin: 0 0 15px 0; /* Adjust margin */
+}
+.file-submission-controls input,
+.file-submission-controls select {
+    width: 100%; /* Full width within its container */
+    flex-grow: 0; /* Prevent growing */
+}
+
+/* Responsive adjustments for search and filter bars */
+@media (max-width: 768px) {
+  .performance-controls,
+  .file-submission-controls {
+    flex-direction: column;
+    gap: 10px;
+    max-width: 90%;
+  }
+  .performance-controls input,
+  .performance-controls select,
+  .file-submission-controls input,
+  .file-submission-controls select {
+    width: 100%;
+    min-width: unset;
+  }
+}
+
+#fileSubmissionsContent h2 {
+    text-align: center;
+    color: #116530;
+    margin-bottom: 30px;
+    font-size: 2.2rem;
+    font-weight: 700;
+    letter-spacing: -0.8px;
+}
+
+.file-submission-layout {
+    display: flex;
+    gap: 30px;
+    width: 100%;
+    max-width: 2200px; /* Max width for the entire layout */
+    align-items: flex-start; /* Align items to the top */
+}
+
+/* Student List Container */
+.student-list-container {
+    width: 300px; /* Wider student list */
+    flex-shrink: 0;
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    height: 75vh; /* Fixed height for scrolling */
+    overflow-y: auto;
+    border: 1px solid #e5e7eb;
+    display: flex;
+    flex-direction: column;
+}
+
+.student-list-container h3 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: #116530;
+    font-size: 1.5rem;
+    font-weight: 600;
+    text-align: center;
+}
+
+.file-submission-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.file-submission-controls input,
+.file-submission-controls select {
+    padding: 10px 15px;
+    border-radius: 8px;
+    border: 1px solid #d1d5db;
+    width: 100%;
+    font-size: 1rem;
+    color: #374151;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.file-submission-controls input:focus,
+.file-submission-controls select:focus {
+    border-color: #116530;
+    box-shadow: 0 0 0 3px rgba(17, 101, 48, 0.2);
+    outline: none;
+}
+
+.student-list {
+    flex-grow: 1;
+}
+
+.student-list-item {
+    padding: 12px 15px;
+    cursor: pointer;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    background-color: #f8fafc;
+    border: 1px solid #e5e7eb;
+    color: #374151;
+    transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.student-list-item:hover {
+    background-color: #eef7ee;
+    border-color: #116530;
+    box-shadow: 0 2px 8px rgba(17, 101, 48, 0.1);
+}
+
+.student-list-item.active {
+    background-color: #116530;
+    color: white;
+    border-color: #116530;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(17, 101, 48, 0.2);
+}
+
+/* File Display Container */
+.file-display-container {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+#student-details-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    border: 1px solid #e5e7eb;
+    margin-bottom: 20px;
+}
+
+#student-details-header img {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid #116530;
+    flex-shrink: 0;
+}
+
+#student-details-header .student-info {
+    flex-grow: 1;
+    text-align: left;
+}
+
+#student-details-header h4 {
+    margin: 0 0 5px 0;
+    color: #1e293b; /* Changed to a darker text color, not green */
+    font-size: 1.4rem; /* Reduced font size */
+    font-weight: 700;
+    white-space: normal; /* Allow text to wrap */
+    overflow: visible; /* Ensure full text is visible */
+    text-overflow: clip; /* Prevent ellipsis */
+    max-width: none; /* Remove max-width constraint */
+}
+
+#student-details-header p {
+    margin: 0;
+    color: #475569;
+    font-size: 0.9rem; /* Reduced font size */
+    white-space: normal; /* Allow text to wrap */
+    overflow: visible; /* Ensure full text is visible */
+    text-overflow: clip; /* Prevent ellipsis */
+    max-width: none; /* Remove max-width constraint */
+}
+
+#student-details-header .progress-circle-container {
+    flex-shrink: 0;
+    margin-left: auto; /* Push to the right */
+}
+
+/* File Submission Cards Grid */
+#file-submission-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Further adjusted for more cards side-by-side */
+    gap: 5px; /* Reduced gap to 5px as requested */
+    width: 100%;
+}
+
+#file-submission-cards .file-card {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 250px; /* Ensure consistent height */
+}
+
+#file-submission-cards .file-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+#file-submission-cards .file-card h4 {
+    margin: 0 0 10px 0;
+    font-size: 1.3rem;
+    color: #116530;
+    font-weight: 700;
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+    max-width: none;
+}
+
+#file-submission-cards .file-card p {
+    margin: 0 0 15px 0;
+    color: #555;
+    font-size: 0.95rem;
+}
+
+#file-submission-cards .file-card .file-actions {
+    margin-top: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+}
+
+#file-submission-cards .file-card .file-actions .button,
+#file-submission-cards .file-card .file-actions button {
+    background: linear-gradient(135deg, #116530 0%, #28a745 100%);
+    border: none;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(17, 101, 48, 0.3);
+    flex-grow: 1;
+    min-width: 100px;
+}
+
+#file-submission-cards .file-card .file-actions .button:hover,
+#file-submission-cards .file-card .file-actions button:hover {
+    background: linear-gradient(135deg, #0e5128 0%, #1e7e34 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(17, 101, 48, 0.4);
+}
+
+#file-submission-cards .file-card .approved-text {
+    color: #116530;
+    font-weight: bold;
+    padding: 10px 15px;
+    border: 1px solid #116530;
+    border-radius: 8px;
+    background-color: #eef7ee;
+    display: inline-block;
+    margin-top: 10px;
+}
+
+/* Comments Section */
+.comments-section {
+    margin-top: 20px;
+    width: 100%;
+    text-align: left;
+}
+
+.comments-header {
+    cursor: pointer;
+    font-weight: 600;
+    padding: 10px 15px;
+    background: #f0f0f0;
+    border-radius: 8px;
+    color: #374151;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.2s ease;
+}
+
+.comments-header:hover {
+    background-color: #e0e0e0;
+}
+
+.comments-container {
+    padding: 15px;
+    border: 1px solid #e5e7eb;
+    border-top: none;
+    border-radius: 0 0 8px 8px;
+    background-color: #fdfdfd;
+    max-height: 200px; /* Limit height for comments */
+    overflow-y: auto;
+}
+
+.comments-list {
+    margin-bottom: 15px;
+}
+
+.comment {
+    border-bottom: 1px solid #eee;
+    padding: 10px 0;
+}
+
+.comment:last-child {
+    border-bottom: none;
+}
+
+.comment p {
+    margin: 0;
+    line-height: 1.4;
+}
+
+.comment strong {
+    color: #116530;
+}
+
+.comment-date {
+    font-size: 0.85em;
+    color: #888;
+    margin-left: 8px;
+}
+
+.comment-form textarea {
+    width: 100%;
+    min-height: 80px;
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    resize: vertical;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+}
+
+.comment-form button {
+    background-color: #116530;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 15px;
+    font-weight: 600;
+    cursor: pointer;
+    width: 100%;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+}
+
+.comment-form button:hover {
+    background-color: #0e5128;
+}
+
+/* Progress Circle for Student Details Header */
+#student-details-header .progress-circle-container {
+    width: 100px;
+    height: 100px;
+    flex-shrink: 0;
+}
+#student-details-header .progress-circle {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background: conic-gradient(#116530 0deg, #e0e0e0 0deg); /* Default empty */
+}
+#student-details-header .progress-circle .progress-value {
+    position: absolute;
+    width: 85%;
+    height: 85%;
+    background: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #116530;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+    .file-submission-layout {
+        flex-direction: column;
+        align-items: center;
+    }
+    .student-list-container {
+        width: 100%;
+        max-width: 600px;
+        height: auto; /* Allow height to adjust */
+        margin-bottom: 20px;
+    }
+    #file-submission-cards {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Adjusted for smaller screens */
+    }
+}
+
+@media (max-width: 768px) {
+    #fileSubmissionsContent {
+        padding: 20px;
+        margin: 15px;
+        width: calc(100% - 30px);
+        min-height: calc(100vh - 112px);
+        border-radius: 16px;
+    }
+    #fileSubmissionsContent h2 {
+        font-size: 1.8rem;
+        margin-bottom: 20px;
+    }
+    .file-submission-layout {
+        gap: 20px;
+    }
+    .student-list-container {
+        padding: 15px;
+        border-radius: 10px;
+    }
+    .student-list-container h3 {
+        font-size: 1.3rem;
+        margin-bottom: 15px;
+    }
+    .file-submission-controls input,
+    .file-submission-controls select {
+        padding: 8px 12px;
+        font-size: 0.9rem;
+    }
+    .student-list-item {
+        padding: 10px 12px;
+        font-size: 0.95rem;
+    }
+    #student-details-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+        padding: 15px;
+    }
+    #student-details-header img {
+        width: 70px;
+        height: 70px;
+        border: 3px solid #116530;
+    }
+    #student-details-header h3 {
+        font-size: 1.5rem;
+    }
+    #student-details-header p {
+        font-size: 0.9rem;
+    }
+    #student-details-header .progress-circle-container {
+        width: 80px;
+        height: 80px;
+        margin-left: 0;
+    }
+    #student-details-header .progress-circle .progress-value {
+        font-size: 1rem;
+    }
+    #file-submission-cards {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* Adjusted for wider cards on smaller screens */
+    gap: 5px; /* Reduced gap to 5px as requested */
+    }
+    #file-submission-cards .file-card {
+        padding: 15px;
+        min-height: auto;
+    }
+    #file-submission-cards .file-card h4 {
+        font-size: 1.1rem;
+    }
+    #file-submission-cards .file-card p {
+        font-size: 0.9rem;
+    }
+    #file-submission-cards .file-card .file-actions {
+        gap: 8px;
+    }
+    #file-submission-cards .file-card .file-actions .button,
+    #file-submission-cards .file-card .file-actions button {
+        padding: 8px 12px;
+        font-size: 0.85rem;
+        border-radius: 6px;
+        min-width: unset;
+    }
+    .comments-section {
+        margin-top: 15px;
+    }
+    .comments-header {
+        padding: 8px 12px;
+        font-size: 0.95rem;
+    }
+    .comments-container {
+        padding: 10px;
+    }
+    .comment {
+        padding: 8px 0;
+    }
+    .comment-form textarea {
+        min-height: 60px;
+        padding: 8px;
+        font-size: 0.9rem;
+    }
+    .comment-form button {
+        padding: 8px 12px;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    #fileSubmissionsContent {
+        padding: 15px;
+        margin: 10px;
+        width: calc(100% - 20px);
+        border-radius: 12px;
+    }
+    #fileSubmissionsContent h2 {
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+    }
+    .file-submission-layout {
+        gap: 15px;
+    }
+    .student-list-container {
+        padding: 10px;
+        border-radius: 8px;
+    }
+    .student-list-container h3 {
+        font-size: 1.1rem;
+        margin-bottom: 10px;
+    }
+    .file-submission-controls input,
+    .file-submission-controls select {
+        padding: 6px 10px;
+        font-size: 0.85rem;
+    }
+    .student-list-item {
+        padding: 8px 10px;
+        font-size: 0.9rem;
+    }
+    #student-details-header {
+        gap: 10px;
+        padding: 10px;
+    }
+    #student-details-header img {
+        width: 60px;
+        height: 60px;
+    }
+    #student-details-header h3 {
+        font-size: 1.2rem;
+    }
+    #student-details-header p {
+        font-size: 0.85rem;
+    }
+    #student-details-header .progress-circle-container {
+        width: 70px;
+        height: 70px;
+    }
+    #student-details-header .progress-circle .progress-value {
+        font-size: 0.9rem;
+    }
+    #file-submission-cards .file-card {
+        padding: 12px;
+    }
+    #file-submission-cards .file-card h4 {
+        font-size: 1rem;
+    }
+    #file-submission-cards .file-card p {
+        font-size: 0.85rem;
+    }
+    #file-submission-cards .file-card .file-actions {
+        gap: 6px;
+    }
+    #file-submission-cards .file-card .file-actions .button,
+    #file-submission-cards .file-card .file-actions button {
+        padding: 6px 10px;
+        font-size: 0.8rem;
+    }
+    .comments-section {
+        margin-top: 10px;
+    }
+    .comments-header {
+        padding: 6px 10px;
+        font-size: 0.9rem;
+    }
+    .comments-container {
+        padding: 8px;
+    }
+    .comment {
+        padding: 6px 0;
+    }
+    .comment-form textarea {
+        min-height: 50px;
+        padding: 6px;
+        font-size: 0.85rem;
+    }
+    .comment-form button {
+        padding: 6px 10px;
+        font-size: 0.85rem;
+    }
+}

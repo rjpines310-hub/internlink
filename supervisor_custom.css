@@ -1,0 +1,5635 @@
+/* General Reset and Body Styles from student.css */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background: url('bg.png') no-repeat center center fixed;
+  background-size: cover;
+  height: 100vh;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header Styles from student.css */
+header {
+  background: rgba(255, 255, 255, 0.9);
+  color: #006400;
+  padding: 12px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 10;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 3px 12px rgba(0,0,0,0.3);
+}
+
+.header-left {
+  display: flex;
+  align-items: flex-start;
+  font-size: 14px;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+header h2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.75rem;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+header h2 div {
+  text-align: center;
+}
+
+header h2 div span:first-child {
+  font-size: 1.75rem;
+}
+
+header h2 div span:last-child {
+  font-size: 0.84rem;
+}
+
+header img {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+}
+
+.nav-buttons {
+  display: flex;
+  gap: 10px;
+  flex-wrap: nowrap;
+}
+
+.nav-buttons button,
+.nav-buttons a.home-link {
+  background: white;
+  color: #006400;
+  border: 1px solid #006400;
+  padding: 7px 14px;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 20px;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.nav-buttons button.active,
+.nav-buttons button:hover,
+.nav-buttons a.home-link:hover {
+  background: #006400;
+  color: white;
+  border-color: #006400;
+}
+
+/* Hamburger Menu from student.css */
+.hamburger-btn {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  padding: 5px;
+}
+
+.hamburger-btn span {
+  width: 25px;
+  height: 3px;
+  background: #006400;
+  margin: 3px 0;
+  transition: 0.3s;
+}
+
+.hamburger-btn.active span:nth-child(1) {
+  transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+.hamburger-btn.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger-btn.active span:nth-child(3) {
+  transform: rotate(45deg) translate(-5px, -6px);
+}
+
+/* Dashboard Wrapper and Sidebar from student.css */
+.dashboard-wrapper {
+  display: flex;
+  flex: 1;
+  margin-top: 110px;
+  min-height: calc(100vh - 110px);
+}
+
+.sidebar {
+  width: 220px;
+  background-color: #116530;
+  color: white;
+  padding-top: 30px;
+  height: calc(100vh - 88px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: fixed;
+  top: 88px;
+  left: 0;
+  overflow-y: auto;
+  z-index: 1000;
+  box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+}
+
+.sidebar .profile-pic-container {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  margin-bottom: 10px;
+  border-radius: 50%;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.sidebar .profile-pic-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid white;
+}
+
+.sidebar .overlay {
+  position: absolute;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  width: 100%;
+  text-align: center;
+  font-size: 0.8rem;
+  padding: 5px 0;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.profile-pic-container:hover .overlay {
+  opacity: 1;
+}
+
+.sidebar .student-name {
+  margin-bottom: 20px;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.sidebar form input[type="file"] {
+  display: none;
+}
+
+.sidebar a {
+  padding: 12px 20px;
+  color: white;
+  text-decoration: none;
+  font-size: 0.95rem;
+  width: 100%;
+  text-align: left;
+  transition: background 0.3s;
+  cursor: pointer;
+}
+
+.sidebar a:hover {
+  background-color: #0b4523;
+}
+
+/* Main Content Area - Adjusted for full width and stacking */
+.main-content,
+.profile,
+.tab-content {
+  flex-grow: 1;
+  padding: 40px;
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 14px;
+  margin: 10px 30px 30px 250px; /* Default margin for desktop with sidebar */
+  overflow-y: auto;
+  display: none; /* Hidden by default */
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  text-align: center;
+  height: auto;
+  min-height: calc(100vh - 200px);
+  position: relative;
+}
+
+.main-content.active,
+.profile.active,
+.tab-content.active {
+  display: flex; /* Show when active */
+}
+
+.welcome-message {
+  font-size: 2.8rem;
+  color: #116530;
+  margin-bottom: 40px;
+  font-weight: 700;
+  letter-spacing: -0.05em;
+  position: relative;
+  padding-bottom: 5px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInSlideUpWelcome 0.8s ease-out forwards;
+}
+
+
+
+@keyframes fadeInSlideUpWelcome {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes drawLine {
+  to {
+    width: 100px;
+    opacity: 1;
+  }
+}
+
+.main-content h2,
+.profile h2,
+.tab-content h2 {
+  font-size: 1.8rem;
+  color: #222;
+  margin-bottom: 10px;
+}
+
+.main-content p,
+.profile p,
+.tab-content p {
+  font-size: 1rem;
+  color: #444;
+  line-height: 1.5;
+  opacity: 0.9;
+}
+
+/* Profile Form Styles from student.css */
+#profileContent {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 255, 248, 0.95) 100%);
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: 0 10px 30px rgba(17, 101, 48, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(17, 101, 48, 0.1);
+  max-width: 600px;
+  margin: 0 auto;
+  justify-content: flex-start;
+}
+
+#profileContent h2 {
+  color: #116530;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 30px;
+  text-align: center;
+  position: relative;
+  letter-spacing: -0.5px;
+}
+
+#profileContent h2::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 4px;
+  background: linear-gradient(90deg, #116530, #28a745);
+  border-radius: 2px;
+}
+
+#profileForm {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  padding: 15px 20px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 12px;
+  border: 1px solid rgba(17, 101, 48, 0.1);
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(17, 101, 48, 0.05);
+}
+
+.form-row:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(17, 101, 48, 0.1);
+  border-color: rgba(17, 101, 48, 0.2);
+}
+
+.form-row label {
+  font-weight: 600;
+  color: #116530;
+  font-size: 1rem;
+  min-width: 120px;
+  text-align: left;
+  margin: 0;
+}
+
+.form-row input {
+  flex: 1;
+  padding: 12px 16px;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 2px solid rgba(17, 101, 48, 0.1);
+  background: #fff;
+  color: #333;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+.form-row input:focus {
+  border-color: #116530;
+  box-shadow: 0 0 0 3px rgba(17, 101, 48, 0.1);
+  transform: translateY(-1px);
+}
+
+.form-row input:disabled {
+  background-color: #f8f9fa;
+  color: #6c757d;
+  cursor: not-allowed;
+  border-color: #dee2e6;
+}
+
+.edit-icon {
+  cursor: pointer;
+  color: #116530;
+  font-size: 1.2rem;
+  padding: 8px;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  background: rgba(17, 101, 48, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+}
+
+.edit-icon:hover {
+  background: #116530;
+  color: white;
+  transform: scale(1.1);
+}
+
+#passwordFields {
+  margin-top: 10px;
+}
+
+#passwordFields .form-row {
+  margin-left: 20px;
+  margin-right: 20px;
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.6);
+  border-left: 4px solid #116530;
+}
+
+.action-buttons {
+  margin-top: 30px;
+  display: none;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.action-buttons button {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 3px 12px rgba(17, 101, 48, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.action-buttons button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left 0.5s;
+}
+
+.action-buttons button:hover::before {
+  left: 100%;
+}
+
+.save-btn {
+  background: linear-gradient(135deg, #116530 0%, #28a745 100%);
+  color: white;
+}
+
+.save-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 18px rgba(17, 101, 48, 0.4);
+}
+
+.cancel-btn {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  color: #116530;
+  border: 2px solid #116530;
+}
+
+.cancel-btn:hover {
+  background: linear-gradient(135deg, #e9ecef 0%, #dee2e6 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 18px rgba(108, 117, 125, 0.2);
+}
+
+.back-btn {
+  margin-top: 40px;
+  padding: 14px 28px;
+  background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 3px 12px rgba(108, 117, 125, 0.3);
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.back-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 18px rgba(108, 117, 125, 0.4);
+}
+
+#profileContent hr {
+  border: none;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(17, 101, 48, 0.3), transparent);
+  margin: 30px 0;
+}
+
+/* Dashboard Cards Grid from dashboard.css and faculty_dashboard.css */
+.dashboard-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 30px auto 0 auto;
+}
+
+/* Kard Styles from dashboard.css and faculty_dashboard.css */
+.kard {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(17, 101, 48, 0.1);
+  padding: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease;
+  text-align: left;
+  border: 1px solid rgba(17, 101, 48, 0.1);
+  position: relative;
+  overflow: visible;
+  min-height: auto;
+}
+
+.kard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(17, 101, 48, 0.15);
+  border-color: rgba(17, 101, 48, 0.2);
+}
+
+.kard-header {
+  padding: 20px 24px 16px 24px;
+  background: linear-gradient(135deg, #f0f9f0 0%, #e0f2e0 100%);
+  border-radius: 16px 16px 0 0;
+  position: relative;
+  border-bottom: 1px solid rgba(17, 101, 48, 0.1);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.kard h3 {
+  margin: 0;
+  color: #116530;
+  font-size: 1.1rem;
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: -0.3px;
+}
+
+.kard-content {
+  padding: 20px 24px 24px 24px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.kard-content .info-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.kard-content .info-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+  font-size: 0.95rem;
+  color: #333;
+}
+
+.kard-content .info-list li:last-child {
+  border-bottom: none;
+}
+
+.kard-content .info-list li span:first-child {
+  font-weight: 600;
+  color: #116530;
+}
+
+.kard-content .info-list li span:last-child {
+  color: #666;
+}
+
+.kard-content .no-data {
+  text-align: center;
+  color: #777;
+  padding: 20px;
+}
+
+/* Specific styles for the announcement card from faculty_dashboard.css */
+.announcement-kard .kard-content {
+  padding: 15px 20px;
+}
+
+.announcement-kard .kard-content ul {
+  list-style: none;
+  padding: 0;
+}
+
+.announcement-kard .kard-content .info-item {
+  background: #f9f9f9;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.announcement-kard .kard-content .info-item:last-child {
+  margin-bottom: 0;
+}
+
+.announcement-kard .kard-content .info-label {
+  font-weight: 600;
+  color: #116530;
+  font-size: 1rem;
+}
+
+.announcement-kard .kard-content .info-value {
+  color: #333;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.announcement-kard .kard-content .muted {
+  font-size: 0.75rem;
+  color: #666;
+  margin-top: 5px;
+}
+
+.announcement-kard .new-company-btn {
+  margin-top: 20px;
+  align-self: center;
+}
+
+/* Styles for company-card within kard-content (from student.css) */
+.kard-content .card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.kard-content .company-card {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 15px;
+  background: #fff;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  text-align: center;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.kard-content .company-card:hover {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.kard-content .company-card .profile-logo {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+.kard-content .company-card .card-title {
+  margin: 0 0 5px 0;
+  font-size: 1.1rem;
+  color: #116530;
+  font-weight: 600;
+  word-wrap: break-word;
+  white-space: normal;
+}
+
+.kard-content .company-card .card-summary {
+  margin: 0;
+  color: #666;
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+  word-wrap: break-word;
+  white-space: normal;
+}
+
+.kard-content .company-card .view-details-btn {
+  background-color: #116530;
+  border: none;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease;
+  margin-top: auto;
+}
+
+.kard-content .company-card .view-details-btn:hover {
+  background-color: #0e5128;
+}
+
+/* Dropdown from student.css */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+button.dropbtn {
+  background-color: #4caf50;
+  color: white;
+  padding: 8px 16px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+button.dropbtn:hover {
+  background-color: #388e3c;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 42px;
+  right: 0;
+  background-color: #fff;
+  min-width: 160px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  border-radius: 10px;
+  z-index: 1000;
+  overflow: hidden;
+}
+
+.dropdown-content button,
+.dropdown-content a {
+  display: block;
+  width: 100%;
+  padding: 12px 15px;
+  text-align: left;
+  border: none;
+  background: none;
+  font-size: 1rem;
+  color: #333;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.dropdown-content button:hover,
+.dropdown-content a:hover {
+  background-color: #f1f1f1;
+}
+
+.dropdown.active .dropdown-content {
+  display: block;
+}
+
+/* Mobile Responsive Styles from student.css and faculty_dashboard.css */
+@media (max-width: 992px) {
+  .attendance-wrapper {
+    flex-direction: column;
+  }
+  .attendance-left, .attendance-right {
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    overflow: auto;
+    height: auto;
+    min-height: 100vh;
+  }
+
+  .dropdown {
+    display: flex;
+  }
+
+  button.dropbtn {
+    font-size: 0.8rem;
+    padding: 6px 10px;
+  }
+
+  .hamburger-btn {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 30px;
+    height: 30px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+  }
+
+  .hamburger-btn span {
+    width: 30px;
+    height: 3px;
+    background: #006400;
+    border-radius: 10px;
+    transition: all 0.3s linear;
+    position: relative;
+    transform-origin: 1px;
+  }
+
+  header h2 img {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  header h2 {
+    font-size: 0.9rem;
+  }
+
+  header h2 div span:first-child {
+    font-size: 0.9rem;
+  }
+
+  header h2 div span:last-child {
+    font-size: 0.75rem;
+  }
+
+  .nav-buttons button,
+  .nav-buttons a.home-link {
+    font-size: 0.8rem;
+    padding: 5px 10px;
+  }
+
+  .hamburger-btn.active span:first-child {
+    transform: rotate(45deg);
+  }
+
+  .hamburger-btn.active span:nth-child(2) {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+
+  .hamburger-btn.active span:nth-child(3) {
+    transform: rotate(-45deg);
+  }
+
+  .dashboard-wrapper {
+    margin-top: 56px;
+    position: relative;
+  }
+
+  .sidebar {
+    position: fixed;
+    top: 56px;
+    left: -220px;
+    width: 220px;
+    height: calc(100vh - 56px);
+    z-index: 1000;
+    transition: left 0.3s ease;
+    box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+  }
+
+  .sidebar.mobile-open {
+    left: 0;
+  }
+
+  .dashboard-wrapper.sidebar-open .main-content,
+  .dashboard-wrapper.sidebar-open .tab-content,
+  .dashboard-wrapper.sidebar-open .profile {
+    margin-left: 220px;
+    width: calc(100% - 220px);
+  }
+
+  .main-content,
+  .profile,
+  .tab-content {
+    margin: 20px;
+    padding: 20px;
+    min-height: calc(100vh - 112px);
+  }
+
+  .attendance-wrapper {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .attendance-left {
+    width: 100%;
+  }
+
+  .attendance-right {
+    padding: 20px;
+  }
+
+  .dashboard-cards-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+    margin-top: 20px;
+  }
+
+  .kard {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(17, 101, 48, 0.2);
+    padding: 20px;
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    transition: transform 0.2s ease;
+  }
+
+  .kard-header {
+    padding: 18px 20px 12px 20px;
+  }
+
+  .kard h3 {
+    font-size: 1.2rem;
+    margin-bottom: 8px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .kard h3::before {
+    font-size: 1rem;
+  }
+
+  .kard-company-badge {
+    font-size: 0.8rem;
+    padding: 4px 10px;
+    margin-top: 6px;
+  }
+
+  .kard-job-details {
+    padding: 16px 20px 20px 20px;
+    gap: 12px;
+  }
+
+  .kard-job-info-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+
+  .kard-job-info-label {
+    font-size: 0.75rem;
+  }
+
+  .kard-job-info-value {
+    font-size: 0.9rem;
+  }
+
+  .kard-job-description {
+    padding: 12px;
+    margin: 12px 0;
+  }
+
+  .kard-job-meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 0;
+  }
+
+  .kard-job-allowance {
+    font-size: 0.85rem;
+    padding: 6px 12px;
+  }
+
+  .kard-job-date {
+    font-size: 0.8rem;
+  }
+
+  .kard-apply-btn {
+    width: 100%;
+    text-align: center;
+    padding: 12px;
+    font-size: 0.95rem;
+    margin-top: 12px;
+    border-radius: 25px;
+  }
+
+  .announcement-kard .kard-content .info-item {
+    padding: 10px;
+    margin-bottom: 8px;
+  }
+
+  .announcement-kard .kard-content .info-label {
+    font-size: 0.95rem;
+  }
+
+  .announcement-kard .kard-content .info-value {
+    font-size: 0.85rem;
+  }
+
+  .announcement-kard .kard-content .muted {
+    font-size: 0.7rem;
+  }
+
+  .dashboard-wrapper.sidebar-open #jobOffersContent,
+  .dashboard-wrapper.sidebar-open #myApplicationsContent {
+    margin-left: 220px;
+    width: calc(100% - 220px);
+  }
+
+  #resumeContent {
+    height: auto;
+    max-height: none;
+  }
+}
+
+@media (max-width: 480px) {
+  header h2 {
+    font-size: 1rem;
+  }
+
+  .main-content,
+  .profile,
+  .tab-content {
+    margin: 10px;
+    padding: 15px;
+  }
+
+  .sidebar {
+    width: 200px;
+    left: -200px;
+  }
+
+  .dashboard-wrapper.sidebar-open .main-content,
+  .dashboard-wrapper.sidebar-open .tab-content,
+  .dashboard-wrapper.sidebar-open .profile {
+    margin-left: 200px;
+    width: calc(100% - 200px);
+  }
+
+  .dashboard-wrapper.sidebar-open #jobOffersContent {
+    margin-left: 200px;
+    width: calc(100% - 215px);
+  }
+
+  .kard {
+    padding: 18px;
+  }
+
+  .attendance-right {
+    padding: 15px;
+  }
+
+  .dashboard-cards-grid {
+    gap: 10px;
+    margin-top: 15px;
+  }
+
+  .kard {
+    border-radius: 10px;
+  }
+
+  .kard-header {
+    padding: 12px 15px 8px 15px;
+  }
+
+  .kard h3 {
+    font-size: 0.9rem;
+  }
+
+  .kard-content {
+    padding: 12px 15px;
+    gap: 8px;
+  }
+
+  .kard-content .info-list li {
+    padding: 6px 0;
+    font-size: 0.85rem;
+  }
+
+  .announcement-kard .kard-content .info-item {
+    padding: 8px;
+    margin-bottom: 6px;
+  }
+
+  .announcement-kard .kard-content .info-label {
+    font-size: 0.9rem;
+  }
+
+  .announcement-kard .kard-content .info-value {
+    font-size: 0.8rem;
+  }
+
+  .announcement-kard .kard-content .muted {
+    font-size: 0.65rem;
+  }
+}
+
+/* Progress Bar Styles (from faculty.php embedded styles) */
+.progress-bar-fill {
+  height: 100%;
+  border-radius: 10px;
+  transition: width 0.3s ease;
+}
+
+/* Company Card Styles (from faculty.php embedded styles) */
+.company-card {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 15px;
+  background: #fff;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  text-align: center;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.company-card:hover {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+.company-card h4 {
+  margin: 0 0 5px 0;
+}
+.company-card p {
+  margin: 0;
+  color: #666;
+  font-size: 0.9rem;
+}
+.company-card-buttons button {
+  background-color: #116530;
+  border: none;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease;
+}
+.company-card-buttons button:hover {
+  background-color: #0e5128;
+}
+
+/* Modal Styles (from faculty.php embedded styles) */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1001;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 5% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 800px;
+  border-radius: 10px;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+}
+
+.modal-header h3 {
+  margin: 0;
+  flex-grow: 1;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.close-modal {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.close-modal:hover,
+.close-modal:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-body {
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+/* Resume Preview Styles (from faculty.php embedded styles) */
+.resume-container {
+  --green: #116530;
+  --green-dark: #0e5128;
+  --muted: #eef7ee;
+  --text: #1e293b;
+  font-family: Inter, system-ui, Arial, sans-serif;
+  color: var(--text);
+  background: #f8f9fa;
+}
+.resume-container .card {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 18px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.08);
+  overflow: hidden;
+}
+.resume-container .header {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  padding: 22px;
+  border-bottom: 1px solid #e5e7eb;
+  background: linear-gradient(180deg,#ffffff,#f7fff9);
+}
+.resume-container .avatar {
+  width: 82px;
+  height: 82px;
+  border-radius: 999px;
+  object-fit: cover;
+  border: 4px solid var(--green);
+}
+.resume-container .title h1 { margin: 0; font-size: 24px; line-height: 1.2; }
+.resume-container .sub { margin-top: 6px; font-size: 14px; color: #475569; }
+.resume-container .chips { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
+.resume-container .chip { background: var(--muted); color: var(--green); padding: 6px 10px; border-radius: 999px; font-weight: 600; font-size: 12px; }
+.resume-container .content { padding: 24px; }
+.resume-container section { margin-bottom: 24px; }
+.resume-container section h2 {
+  margin: 0 0 12px 0;
+  font-size: 18px;
+  color: var(--green);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.resume-container .block { background: #ffffff; border: 1px solid #e5e7eb; border-radius: 14px; padding: 16px; }
+.resume-container .row { display: flex; gap: 12px; justify-content: space-between; align-items: flex-start; }
+.resume-container .left { font-weight: 600; }
+.resume-container .muted { color: #64748b; }
+.resume-container ul { margin: 0; padding-left: 18px; }
+.resume-container li { margin: 6px 0; }
+.resume-container .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.resume-container .skill-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(180px,1fr)); gap: 10px; }
+.resume-container .skill { background: #f8fafc; border: 1px solid #e5e7eb; border-radius: 10px; padding: 10px; }
+.resume-container .actions { display: flex; gap: 8px; margin-top: 16px; flex-wrap: wrap; }
+.resume-container .btn { appearance: none; border: none; padding: 10px 14px; border-radius: 10px; font-weight: 600; cursor: pointer; }
+.resume-container .btn-primary { background: var(--green); color: #fff; }
+.resume-container .btn-primary:hover { background: var(--green-dark); }
+.resume-container .btn-ghost { background: #fff; border: 1px solid #e5e7eb; transition: background-color 0.2s ease; }
+.resume-container .btn-ghost:hover { background-color: #f9fafb; }
+.resume-container .form-control { width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; }
+
+/* Ensure modal action buttons are styled correctly (from faculty.php embedded styles) */
+#resumeModal .modal-actions .btn {
+    appearance: none;
+    border: 1px solid transparent;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+#resumeModal .modal-actions .btn-primary {
+    background-color: #116530;
+    color: #fff;
+    border-color: #116530;
+}
+#resumeModal .modal-actions .btn-primary:hover {
+    background-color: #0e5128;
+    border-color: #0e5128;
+}
+#resumeModal .modal-actions .btn-ghost {
+    background-color: #fff;
+    border-color: #d1d5db;
+    color: #374151;
+}
+#resumeModal .modal-actions .btn-ghost:hover {
+    background-color: #f0f0f0;
+    border-color: #9ca3af;
+}
+
+/* Interview Modal Specific Styles (from faculty.php embedded styles) */
+#interviewModal .modal-content {
+  max-width: 500px;
+}
+
+#interviewModal .form-control {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+
+#interviewModal label {
+  font-weight: 600;
+  display: block;
+  margin-top: 10px;
+}
+
+#interviewModal .btn-primary {
+  background-color: #116530;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  width: 100%;
+  font-size: 16px;
+}
+
+#interviewModal .btn-primary:hover {
+  background-color: #0e5128;
+}
+.manual-entry-badge {
+  background-color: #ffc107;
+  color: #343a40;
+  padding: 3px 8px;
+  border-radius: 5px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+.student-suggestions {
+  border: 1px solid #ccc;
+  max-height: 150px;
+  overflow-y: auto;
+  position: absolute;
+  background-color: white;
+  width: calc(100% - 16px);
+  z-index: 100;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  left: 8px;
+  right: 8px;
+  border-radius: 0 0 4px 4px;
+}
+.student-suggestion-item {
+  padding: 8px;
+  cursor: pointer;
+}
+.student-suggestion-item:hover {
+  background-color: #f0f0f0;
+}
+.no-results, .error-message {
+  padding: 8px;
+  color: #666;
+  font-style: italic;
+}
+.mark-completed-btn {
+  background-color: #28a745;
+  color: white;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  margin-top: 10px;
+  transition: background-color 0.3s ease;
+}
+.mark-completed-btn:hover {
+  background-color: #218838;
+}
+.completed-badge {
+  background-color: #116530;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 0.85rem;
+  font-weight: bold;
+  margin-top: 10px;
+  display: inline-block;
+}
+
+/* Tab display rules for faculty.php (embedded due to user constraint) */
+.main-content,
+.profile,
+.tab-content {
+  display: none !important;
+}
+.main-content.active,
+.profile.active,
+.tab-content.active {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: flex-start !important;
+  align-items: flex-start !important;
+  text-align: left !important;
+}
+
+/* Geo Location Tab Styles (from faculty.php embedded styles) */
+#geoLocationContent {
+  padding: 20px;
+  box-sizing: border-box;
+  justify-content: flex-start;
+  align-items: stretch;
+  text-align: left;
+}
+#geoLocationContent.active {
+  display: block !important;
+}
+#geoLocationContent h2 {
+  text-align: center;
+  color: #116530;
+}
+
+/* Ensure action buttons in announcement modal are visible (from faculty.php embedded styles) */
+#announcementModal .action-buttons {
+  display: flex !important;
+}
+
+/* Map specific styles (from faculty.php embedded styles) */
+#mapContainer {
+  height: 400px;
+  width: 100%;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+#mapControls {
+  margin-bottom: 10px;
+  position: relative;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+#mapSearch {
+  flex-grow: 1;
+}
+
+#mapSearchSuggestions {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 1000;
+  display: none;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.map-search-suggestion {
+  padding: 8px;
+  cursor: pointer;
+  border-bottom: 1px solid #eee;
+}
+
+.map-search-suggestion:hover {
+  background-color: #f0f0f0;
+}
+
+/* Company-specific styles for faculty (from faculty.php embedded styles) */
+#companiesContent {
+  display: none;
+  padding: 40px;
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 14px;
+  overflow-y: auto;
+  height: 80vh;
+  color: #116530;
+  text-align: left;
+  font-family: 'Inter', sans-serif;
+}
+
+#companiesContent.active {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: flex-start !important;
+}
+
+.company-section {
+  margin-bottom: 40px;
+}
+
+.company-section h3 {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  color: #0b3d0b;
+  border-bottom: 2px solid #116530;
+  padding-bottom: 5px;
+}
+
+.companies-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+  width: 100%;
+  margin-left: 0;
+  margin-right: auto;
+}
+.company-card {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 15px;
+  background: #fff;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  text-align: center;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.company-card:hover {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+.company-card h4 {
+  margin: 0 0 5px 0;
+}
+.company-card p {
+  margin: 0;
+  color: #666;
+  font-size: 0.9rem;
+}
+.company-card-buttons button {
+  background-color: #116530;
+  border: none;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease;
+}
+.company-card-buttons button:hover {
+  background-color: #0e5128;
+}
+.company-card-buttons button.secondary {
+  background-color: #dc3545;
+}
+.company-card-buttons button.secondary:hover {
+  background-color: #c82333;
+}
+.company-card-buttons button,
+.company-card-buttons a.button {
+  background-color: #116530;
+  border: none;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+}
+.company-card-buttons button:hover,
+.company-card-buttons a.button:hover {
+  background-color: #0e5128;
+}
+.company-card-buttons button.secondary {
+  background-color: #dc3545;
+}
+.company-card-buttons button.secondary:hover {
+  background-color: #c82333;
+}
+
+.interns-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.interns-list li {
+  background: #f9f9f9;
+  border: 1px solid #ddd;
+  margin-bottom: 5px;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+#submittedFilesModalBody .file-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+#submittedFilesModalBody .file-item:last-child {
+  border-bottom: none;
+}
+
+#submittedFilesModalBody .file-actions button,
+#submittedFilesModalBody .file-actions .button {
+  margin-left: 10px;
+  text-decoration: none;
+  background-color: #116530;
+  border: none;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease;
+  display: inline-block;
+}
+#submittedFilesModalBody .file-actions .button:hover {
+    background-color: #0e5128;
+}
+#submittedFilesModalBody .file-actions .approved-text {
+    margin-left: 10px;
+    color: #116530;
+    font-weight: bold;
+}
+
+/* Performance Tab Styles (from faculty.php embedded styles) */
+#performanceContent, #fileSubmissionsContent {
+  padding: 20px;
+  box-sizing: border-box;
+  justify-content: flex-start;
+  align-items: stretch;
+  text-align: left;
+}
+#performanceContent h2, #fileSubmissionsContent h2 {
+  text-align: center;
+  color: #116530;
+}
+.performance-controls {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 20px;
+  width: 100%;
+  max-width: 800px;
+}
+.performance-controls input,
+.performance-controls select {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  width: 100%;
+}
+.progress-circle-container {
+  margin-top: 15px;
+}
+.progress-circle {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  position: relative;
+}
+.progress-circle .progress-value {
+  position: absolute;
+  width: 85px;
+  height: 85px;
+  background: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #116530;
+}
+
+.task-summary {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 15px;
+  padding-top: 10px;
+  border-top: 1px solid #eee;
+}
+.task-count {
+  text-align: center;
+}
+.task-count strong {
+  display: block;
+  font-size: 1.2rem;
+}
+.task-count span {
+  font-size: 0.8rem;
+  color: #666;
+}
+
+/* New styles for file submission layout (from faculty.php embedded styles) */
+.file-submission-layout {
+    display: flex;
+    gap: 20px;
+}
+.student-list-container {
+    width: 250px;
+    flex-shrink: 0;
+    background: #f9f9f9;
+    padding: 15px;
+    border-radius: 8px;
+    height: 70vh;
+    overflow-y: auto;
+}
+.student-list-container h3 {
+    margin-top: 0;
+}
+.student-list-container input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+.student-list-item {
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+.student-list-item:hover, .student-list-item.active {
+    background-color: #e0e0e0;
+}
+.file-display-container {
+    flex-grow: 1;
+}
+.approved-text {
+    color: #116530;
+    font-weight: bold;
+}
+.comments-section {
+    margin-top: 15px;
+}
+.comments-header {
+    cursor: pointer;
+    font-weight: bold;
+    padding: 5px;
+    background: #f0f0f0;
+    border-radius: 4px;
+}
+.comments-container {
+    padding: 10px;
+    border: 1px solid #f0f0f0;
+    border-top: none;
+}
+.comment {
+    border-bottom: 1px solid #eee;
+    padding: 5px 0;
+}
+.comment p {
+    margin: 0;
+}
+.comment-date {
+    font-size: 0.8em;
+    color: #888;
+}
+.comment-form textarea {
+    width: 100%;
+    min-height: 60px;
+    margin-top: 10px;
+}
+.comment-form button {
+    background-color: #116530;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 12px;
+    font-weight: 600;
+    cursor: pointer;
+    width: 100%;
+    font-size: 0.9rem;
+    transition: background-color 0.3s ease;
+}
+.comment-form button:hover {
+  background-color: #0e5128;
+}
+#student-details-header img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+#student-details-header .student-info {
+    flex-grow: 1;
+}
+#student-details-header h3, #student-details-header p {
+    margin: 0;
+}
+
+/* Student Overview Styles (from faculty.php embedded styles) */
+#studentOverviewContent {
+  padding: 20px;
+}
+#studentOverviewGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  width: 100%;
+}
+.progress-circles-container {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 15px;
+}
+.progress-circle-container {
+  text-align: center;
+}
+.progress-circle-container label {
+  margin-top: 5px;
+  font-size: 0.8rem;
+  color: #333;
+}
+
+.progress-bars-container {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 15px;
+}
+.progress-bar-container {
+  text-align: center;
+}
+.progress-bar-bg {
+  width: 100px;
+  height: 10px;
+  background-color: #e0e0e0;
+  border-radius: 5px;
+  overflow: hidden;
+  margin: 0 auto;
+}
+.progress-bar-fill {
+  height: 100%;
+  border-radius: 10px;
+  transition: width 0.3s ease;
+}
+.progress-bar-container .progress-value {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #116530;
+}
+.progress-bar-container label {
+  margin-top: 5px;
+  font-size: 0.8rem;
+  color: #333;
+}
+
+.progress-bar-fill.red {
+  background: red;
+}
+
+.progress-bar-fill.orange {
+  background: orange;
+}
+
+.progress-bar-fill.green {
+  background: green;
+}
+
+.progress-bar-fill.yellow {
+  background: #FFBF00;
+}
+
+#studentAttendanceGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  width: 100%;
+}
+
+.attendance-tracker {
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+}
+.calendar-section {
+    width: 50%;
+}
+.log-section {
+    width: 50%;
+    max-height: 400px;
+    overflow-y: auto;
+}
+#attendanceCalendar table {
+    width: 100%;
+    border-collapse: collapse;
+}
+#attendanceCalendar th, #attendanceCalendar td {
+    text-align: center;
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+#attendanceCalendar td.day-with-log {
+    background-color: #d4edda;
+    cursor: pointer;
+}
+#attendanceCalendar td.selected {
+    background-color: #116530;
+    color: white;
+}
+.log-card {
+    background: #f9f9f9;
+    border-left: 4px solid #116530;
+    padding: 12px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.log-selfie {
+    width: 60px;
+    height: 60px;
+    border-radius: 8px;
+    object-fit: cover;
+    margin-top: 8px;
+}
+.no-selfie-placeholder {
+    width: 60px;
+    height: 60px;
+    border-radius: 8px;
+    background: #f0f0f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #aaa;
+    margin-top: 8px;
+}
+
+/* Messaging Styles (from student.css) */
+#messageContent {
+  padding: 20px 40px;
+  margin: 10px 30px 30px 250px;
+  width: calc(100% - 310px);
+  height: auto;
+  min-height: calc(100vh - 200px);
+  overflow-y: auto;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 255, 248, 0.95) 100%);
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(17, 101, 48, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(17, 101, 48, 0.1);
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: #116530 #f1f1f1;
+}
+
+.messaging-container {
+  display: flex;
+  height: 100%;
+  gap: 0;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.15);
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+}
+
+.conversations-list {
+  width: 350px;
+  background: #f8f9fa;
+  border-right: 1px solid #e9ecef;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.conversations-header {
+  padding: 20px;
+  background: #116530;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.conversations-header h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.new-chat-btn {
+  background: rgba(255,255,255,0.2);
+  border: none;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background 0.3s;
+}
+
+.new-chat-btn:hover {
+  background: rgba(255,255,255,0.3);
+}
+
+.conversations-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 10px 0;
+}
+
+.conversation-item {
+  padding: 15px 20px;
+  cursor: pointer;
+  transition: background 0.3s;
+  border-bottom: 1px solid #f0f0f0;
+  position: relative;
+}
+
+.conversation-item:hover {
+  background: #e9ecef;
+}
+
+.conversation-item.active {
+  background: #e3f2fd;
+  border-left: 4px solid #116530;
+}
+
+.conversation-item.unread {
+  background: #fff3cd;
+  font-weight: 600;
+}
+
+.conversation-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.contact-name {
+  font-size: 1rem;
+  color: #333;
+  font-weight: 600;
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.conversation-time {
+  font-size: 0.8rem;
+  color: #666;
+}
+
+.unread-badge {
+  background: #dc3545;
+  color: white;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 0.7rem;
+  font-weight: bold;
+  min-width: 18px;
+  text-align: center;
+  display: inline-block;
+}
+
+.last-message {
+  font-size: 0.9rem;
+  color: #666;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 280px;
+}
+
+.no-conversations {
+  text-align: center;
+  padding: 40px 20px;
+  color: #666;
+}
+
+.start-chat-btn {
+  background: #116530;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 10px;
+  font-size: 0.9rem;
+}
+
+.start-chat-btn:hover {
+  background: #0b4523;
+}
+
+.chat-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+}
+
+.chat-header {
+  padding: 20px;
+  background: #116530;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.chat-header h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.back-to-conversations {
+  display: none;
+  background: rgba(255,255,255,0.2);
+  border: none;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.messages {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: #f8f9fa;
+  min-height: 0;
+}
+
+.message {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.message.sent {
+  align-self: flex-end;
+  align-items: flex-end;
+}
+
+.message.received {
+  align-self: flex-start;
+  align-items: flex-start;
+}
+
+.message-content {
+  padding: 12px 16px;
+  border-radius: 18px;
+  word-wrap: break-word;
+  line-height: 1.4;
+  font-size: 0.95rem;
+}
+
+.message.sent .message-content {
+  background: #116530;
+  color: white;
+  color: white;
+  border-bottom-right-radius: 6px;
+}
+
+.message.received .message-content {
+  background: white;
+  color: #333;
+  border: 1px solid #e9ecef;
+  border-bottom-left-radius: 6px;
+}
+
+.message-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.75rem;
+  color: #666;
+  padding: 0 4px;
+}
+
+.message.sent .message-meta {
+  justify-content: flex-end;
+}
+
+.read-status {
+  color: #28a745;
+  font-weight: bold;
+}
+
+.no-messages {
+  text-align: center;
+  color: #666;
+  font-style: italic;
+  padding: 40px;
+}
+
+.message-input {
+  display: flex;
+  padding: 20px;
+  background: white;
+  border-top: 1px solid #e9ecef;
+  gap: 12px;
+  align-items: flex-end;
+  flex-shrink: 0;
+}
+
+.message-input input {
+  flex: 1;
+  padding: 12px 16px;
+  border: 1px solid #ddd;
+  border-radius: 25px;
+  outline: none;
+  font-size: 0.95rem;
+  resize: none;
+  max-height: 100px;
+  min-height: 44px;
+}
+
+.message-input input:focus {
+  border-color: #116530;
+  box-shadow: 0 0 0 2px rgba(17, 101, 48, 0.1);
+}
+
+.message-input button {
+  padding: 12px 20px;
+  background: #116530;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: background 0.3s;
+  white-space: nowrap;
+}
+
+.message-input button:hover:not(:disabled) {
+  background: #0b4523;
+}
+
+.message-input button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+/* New Chat Modal (from student.css) */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+}
+
+.modal-content {
+  background-color: white;
+  margin: 10% auto;
+  padding: 0;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.modal-header {
+  padding: 20px;
+  background: #116530;
+  color: white;
+  border-radius: 12px 12px 0 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-header h3 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.close-modal {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-body {
+  padding: 20px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  margin-bottom: 15px;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #116530;
+  box-shadow: 0 0 0 2px rgba(17, 101, 48, 0.1);
+}
+
+.search-results {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.search-result-item {
+  padding: 12px;
+  cursor: pointer;
+  border-radius: 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background 0.3s;
+}
+
+.search-result-item:hover {
+  background: #f8f9fa;
+}
+
+.user-name {
+  font-weight: 600;
+  color: #333;
+}
+
+.user-type {
+  font-size: 0.8rem;
+  color: #666;
+  background: #e9ecef;
+  padding: 2px 8px;
+  border-radius: 12px;
+  text-transform: capitalize;
+}
+
+.no-results {
+  text-align: center;
+  color: #666;
+  padding: 20px;
+  font-style: italic;
+}
+
+/* Loading animation (from student.css) */
+.loading {
+  text-align: center;
+  padding: 20px;
+  color: #666;
+  font-style: italic;
+}
+
+.loading::after {
+  content: '';
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #f3f3f3;
+  border-top: 2px solid #116530;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-left: 10px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.search-placeholder {
+  text-align: center;
+  color: #999;
+  padding: 20px;
+  font-style: italic;
+  font-size: 0.9rem;
+}
+
+.no-conversation-selected {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  background: #f8f9fa;
+}
+
+/* Mobile Responsive for Messaging (from student.css) */
+@media (max-width: 768px) {
+  #messageContent {
+    padding: 20px;
+    height: calc(100vh - 180px);
+    max-height: calc(100vh - 180px);
+    margin: 15px;
+    width: calc(100% - 30px);
+    box-sizing: border-box;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 255, 248, 0.95) 100%);
+    border-radius: 16px;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    box-shadow: 0 8px 25px rgba(17, 101, 48, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(17, 101, 48, 0.1);
+    overflow-x: hidden;
+  }
+
+  .messaging-container {
+    height: calc(100% - 40px);
+    flex-direction: column;
+    overflow: hidden;
+    width: 100%;
+  }
+
+  .conversations-list {
+    width: 100%;
+    height: 40%;
+    min-width: auto;
+    flex-shrink: 0;
+    overflow-y: auto;
+    position: relative;
+    border-bottom: 1px solid #e9ecef;
+  }
+
+  .chat-area {
+    width: 100%;
+    flex: 1;
+    height: auto;
+    position: relative;
+    display: none;
+  }
+
+  .chat-area.active {
+    display: flex;
+  }
+
+  .back-to-conversations {
+    display: block;
+  }
+
+  .message {
+    max-width: 95%;
+  }
+
+  .message-content {
+    word-break: break-word;
+    hyphens: auto;
+    font-size: 0.85rem;
+  }
+
+  .message-input {
+    padding: 12px;
+    gap: 8px;
+  }
+
+  .message-input input {
+    min-height: 40px;
+    padding: 10px 14px;
+    font-size: 0.9rem;
+  }
+
+  .message-input button {
+    padding: 10px 16px;
+    font-size: 0.9rem;
+    min-width: 50px;
+  }
+
+  .modal-content {
+    margin: 5% auto;
+    width: 95%;
+    max-height: 80vh;
+    overflow-y: auto;
+  }
+
+  .conversations-list.mobile-hidden {
+    display: none !important;
+  }
+
+  .chat-area.mobile-hidden {
+    display: none !important;
+  }
+
+  .conversations-list,
+  .chat-area {
+    position: relative;
+    width: 100%;
+  }
+
+  .dashboard-wrapper.sidebar-open #messageContent {
+    margin-left: 0;
+    width: calc(100% - 30px);
+  }
+
+  .dashboard-wrapper {
+    margin-top: 56px;
+  }
+
+  .sidebar {
+    height: calc(100vh - 56px);
+    top: 56px;
+  }
+}
+
+@media (max-width: 480px) {
+  #messageContent {
+    margin: 5px;
+    height: calc(100vh - 70px);
+    width: calc(100% - 10px);
+  }
+
+  .conversations-header,
+  .chat-header {
+    padding: 12px;
+  }
+
+  .conversations-header h3,
+  .chat-header h3 {
+    font-size: 1rem;
+  }
+
+  .conversation-item {
+    padding: 10px 12px;
+    font-size: 0.9rem;
+  }
+
+  .contact-name {
+    max-width: 150px;
+  }
+
+  .last-message {
+    max-width: 200px;
+    font-size: 0.85rem;
+  }
+
+  .messages {
+    padding: 10px;
+    gap: 10px;
+  }
+
+  .message {
+    width: 85%;
+  }
+
+  .message-content {
+    padding: 10px 12px;
+    font-size: 0.9rem;
+    line-height: 1.3;
+  }
+
+  .message-input {
+    padding: 10px;
+    gap: 6px;
+  }
+
+  .message-input input {
+    padding: 8px 12px;
+    font-size: 0.85rem;
+    min-height: 36px;
+  }
+
+  .message-input button {
+    padding: 8px 12px;
+    font-size: 0.85rem;
+  }
+
+  .modal-content {
+    width: 98%;
+    margin: 2% auto;
+  }
+
+  .search-input {
+    padding: 10px 12px;
+    font-size: 0.9rem;
+  }
+
+  .search-result-item {
+    padding: 10px;
+    font-size: 0.9rem;
+  }
+}
+
+/* Scrollbar Styling for Messaging (from student.css) */
+.conversations-body::-webkit-scrollbar,
+.messages::-webkit-scrollbar,
+.search-results::-webkit-scrollbar {
+  width: 6px;
+}
+
+.conversations-body::-webkit-scrollbar-track,
+.messages::-webkit-scrollbar-track,
+.search-results::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.conversations-body::-webkit-scrollbar-thumb,
+.messages::-webkit-scrollbar-thumb,
+.search-results::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 3px;
+}
+
+.conversations-body::-webkit-scrollbar-thumb:hover,
+.messages::-webkit-scrollbar-thumb:hover,
+.search-results::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+/* Comments Section (from student.css) */
+.comments-section {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.comments-header {
+  background-color: #f0f0f0;
+  padding: 8px;
+  cursor: pointer;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.comments-container {
+  border: 1px solid #ddd;
+  border-top: none;
+  padding: 10px;
+  border-radius: 0 0 4px 4px;
+}
+
+.comments-list {
+  max-height: 200px;
+  overflow-y: auto;
+  margin-bottom: 10px;
+}
+
+.comment {
+  border-bottom: 1px solid #eee;
+  padding: 8px 0;
+}
+
+.comment p {
+  margin: 0;
+}
+
+.comment-date {
+  font-size: 0.8em;
+  color: #888;
+}
+
+.comment-form textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+  min-height: 50px;
+}
+
+.comment-form button {
+  background-color: #116530;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 8px 16px;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 3px 6px rgba(0, 100, 0, 0.4);
+  margin-top: 5px;
+}
+
+/* Interview Details Modal (from student.css) */
+#interviewDetailsModal .modal-content {
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  border-radius: 16px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+  border: 1px solid rgba(0,0,0,0.1);
+  max-width: 550px;
+}
+
+#interviewDetailsModal .modal-header {
+  background: #116530;
+  color: white;
+  padding: 20px 25px;
+  border-radius: 16px 16px 0 0;
+  border-bottom: 1px solid #0b4523;
+}
+
+#interviewDetailsModal .modal-header h3 {
+  margin: 0;
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+#interviewDetailsModal .modal-body {
+  padding: 25px 30px;
+}
+
+.interview-details {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.interview-detail-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  padding: 12px;
+  background: #f8f9fa;
+  border-left: 4px solid #28a745;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+.interview-detail-item strong {
+  font-weight: 600;
+  color: #116530;
+  flex-shrink: 0;
+  width: 120px;
+}
+
+.interview-detail-item span {
+  color: #333;
+}
+
+.interview-detail-item a {
+  color: #1e7e34;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s;
+}
+
+.interview-detail-item a:hover {
+  color: #28a745;
+  text-decoration: underline;
+}
+
+/* OJT Hours Section Styles (from student.css) */
+#ojtHoursContent {
+  padding: 20px;
+  box-sizing: border-box;
+  justify-content: flex-start;
+  align-items: stretch;
+  text-align: left;
+}
+
+#ojtHoursContent h2 {
+  text-align: center;
+  color: #116530;
+  margin-bottom: 30px;
+}
+
+.section-hours-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.section-card {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  border: 1px solid rgba(17, 101, 48, 0.1);
+}
+
+.section-card h3 {
+  font-weight: 700;
+  color: #116530;
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+}
+
+.section-card .form-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.section-card .form-row label {
+  font-weight: 600;
+  color: #333;
+  flex-shrink: 0;
+}
+
+.section-card .form-row input[type="number"] {
+  flex-grow: 1;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.section-card .form-row input[type="number"]:disabled {
+  background-color: #f0f0f0;
+  cursor: not-allowed;
+}
+
+.section-card .edit-icon {
+  cursor: pointer;
+  color: #116530;
+  font-size: 1.1rem;
+  padding: 6px;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  background: rgba(17, 101, 48, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+}
+
+.section-card .edit-icon:hover {
+  background: #116530;
+  color: white;
+  transform: scale(1.1);
+}
+
+.section-card .action-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.section-card .action-buttons .save-btn,
+.section-card .action-buttons .cancel-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+  flex: 1;
+  max-width: 120px;
+}
+
+.section-card .action-buttons .save-btn {
+  background: linear-gradient(135deg, #116530 0%, #28a745 100%);
+  color: white;
+}
+
+.section-card .action-buttons .save-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(17, 101, 48, 0.3);
+}
+
+.section-card .action-buttons .cancel-btn {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  color: #116530;
+  border: 1px solid #116530;
+}
+
+.section-card .action-buttons .cancel-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(108, 117, 125, 0.2);
+}
+
+/* Supervisor specific styles */
+.student-overview-card {
+  cursor: pointer;
+}
+.progress-circles-container {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 15px;
+}
+.progress-circle-container {
+  position: relative;
+  width: 140px;
+  height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: visible;
+}
+.progress-ring {
+  transform: rotate(-90deg);
+}
+.progress-ring__circle-bg {
+    stroke: #e6e6e6;
+}
+.progress-ring__circle {
+    transition: stroke-dashoffset 0.5s ease;
+}
+.progress-ring .progress-ring__circle.red { stroke: red; }
+.progress-ring .progress-ring__circle.orange { stroke: orange; }
+.progress-ring .progress-ring__circle.yellow { stroke: #FFBF00; }
+.progress-ring .progress-ring__circle.green { stroke: #28a745; }
+.progress-text {
+    position: absolute;
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #116530;
+}
+.progress-circle-container label {
+  position: absolute;
+  bottom: -15px;
+  left: 0;
+  right: 0;
+  font-size: 0.8rem;
+  color: #333;
+}
+
+/* Modal styles (from supervisor.php embedded styles) */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.4);
+}
+.modal-content {
+  background-color: #fefefe;
+  margin: 10% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 500px;
+  border-radius: 8px;
+  position: relative;
+}
+.close-btn {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  position: absolute;
+  top: 10px;
+  right: 20px;
+}
+.close-btn:hover,
+.close-btn:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.view-resume-btn {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 8px 16px;
+  background-color: #116530;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease;
+}
+
+.view-resume-btn:hover {
+  background-color: #0e5128;
+}
+
+#resumeModal .modal-content {
+  text-align: left;
+}
+
+#resumeModal h4 {
+  color: #116530;
+  border-bottom: 2px solid #116530;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+#resumeModal p {
+  margin-bottom: 10px;
+  line-height: 1.6;
+}
+
+#resumeModal p strong {
+  color: #333;
+}
+#resumeModal .modal-content {
+  max-width: 700px;
+}
+#resumeModal .resume-header {
+  text-align: center;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #eee;
+}
+#resumeModal .resume-header img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #116530;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+#resumeModal .resume-header h3 {
+  margin: 10px 0 5px;
+  color: #333;
+}
+#resumeModal .resume-header p {
+  margin: 0;
+  color: #666;
+  font-size: 0.9rem;
+}
+#resumeModal h5 {
+    color: #116530;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 5px;
+    margin-top: 20px;
+    font-size: 1.1rem;
+}
+#resumeModal ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+#resumeModal ul li {
+    background: #f9f9f9;
+    margin-bottom: 8px;
+    padding: 12px;
+    border-radius: 4px;
+    border-left: 3px solid #116530;
+}
+
+.search-bar {
+  width: 100%;
+  font-size: 16px;
+  padding: 12px 20px 12px 40px;
+  border: 1px solid #ddd;
+  margin-bottom: 12px;
+  background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22%23aaa%22%3E%3Cpath%20d%3D%22M23.7%2022.3l-6.2-6.2c1.4-1.7%202.3-3.9%202.3-6.3%200-5.5-4.5-10-10-10S-0.2%204.3-0.2%209.8s4.5%2010%2010%2010c2.4%200%204.6-0.9%206.3-2.3l6.2%206.2%201.4-1.4zm-13.9-3.5c-4.4%200-8-3.6-8-8s3.6-8%208-8%208%203.6%208%208-3.6%208-8%208z%22/%3E%3C/svg%3E');
+  background-position: 10px 12px;
+  background-repeat: no-repeat;
+  background-size: 20px;
+  border-radius: 25px;
+  transition: all 0.3s ease;
+}
+.search-bar:focus {
+  border-color: #116530;
+  box-shadow: 0 0 5px rgba(17, 101, 48, 0.5);
+  outline: none;
+}
+.progress-bar-container {
+  text-align: center;
+}
+.progress-bar-bg {
+  width: 100px;
+  height: 10px;
+  background-color: #e0e0e0;
+  border-radius: 5px;
+  overflow: hidden;
+  margin: 0 auto;
+}
+.progress-bar-fill {
+  height: 100%;
+  border-radius: 10px;
+  transition: width 0.3s ease;
+}
+.progress-bar-container .progress-value {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #116530;
+}
+.progress-bar-container label {
+  margin-top: 5px;
+  font-size: 0.8rem;
+  color: #333;
+}
+
+.progress-bar-fill.red {
+  background: red;
+}
+
+.progress-bar-fill.orange {
+  background: orange;
+}
+
+.progress-bar-fill.green {
+  background: green;
+}
+
+.progress-bar-fill.yellow {
+  background: #FFBF00;
+}
+#studentAttendanceGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  width: 100%;
+}
+    
+.student-attendance-grid .company-card {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+.attendance-tracker {
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+}
+.calendar-section {
+    width: 50%;
+}
+.log-section {
+    width: 50%;
+    max-height: 400px;
+    overflow-y: auto;
+}
+#attendanceCalendar table {
+    width: 100%;
+    border-collapse: collapse;
+}
+#attendanceCalendar th, #attendanceCalendar td {
+    text-align: center;
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+#attendanceCalendar td.day-with-log {
+    background-color: #d4edda;
+    cursor: pointer;
+}
+#attendanceCalendar td.selected {
+    background-color: #116530;
+    color: white;
+}
+.log-card {
+    background: #f9f9f9;
+    border-left: 4px solid #116530;
+    padding: 12px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.log-selfie {
+    width: 60px;
+    height: 60px;
+    border-radius: 8px;
+    object-fit: cover;
+    margin-top: 8px;
+}
+.no-selfie-placeholder {
+    width: 60px;
+    height: 60px;
+    border-radius: 8px;
+    background: #f0f0f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #aaa;
+    margin-top: 8px;
+}
+.log-validation-section {
+    padding-left: 15px;
+}
+.validate-btn {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.3s ease;
+}
+.validate-btn:hover {
+    background-color: #218838;
+}
+.validate-btn:disabled {
+    background-color: #6c757d;
+    cursor: not-allowed;
+}
+.validated-status {
+    color: #28a745;
+    font-weight: bold;
+}
+#imageModal {
+    z-index: 1003; /* Higher than the attendance modal */
+}
+#imageModal .modal-content {
+    background: transparent;
+    box-shadow: none;
+    border: none;
+    width: auto;
+    height: auto;
+}
+
+/* Dashboard Cards Grid for Supervisor Home */
+.dashboard-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Responsive grid */
+  gap: 20px;
+  width: 100%;
+  max-width: 100%;
+  margin-top: 30px;
+}
+
+/* Kard Styles (similar to faculty_dashboard.css) */
+.kard {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(17, 101, 48, 0.1);
+  padding: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease;
+  text-align: left;
+  border: 1px solid rgba(17, 101, 48, 0.1);
+  position: relative;
+  overflow: visible;
+  min-height: auto;
+}
+
+.kard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(17, 101, 48, 0.15);
+  border-color: rgba(17, 101, 48, 0.2);
+}
+
+.kard-header {
+  padding: 20px 24px 16px 24px;
+  background: linear-gradient(135deg, #f0f9f0 0%, #e0f2e0 100%); /* Modern gradient background */
+  border-radius: 16px 16px 0 0;
+  position: relative;
+  border-bottom: 1px solid rgba(17, 101, 48, 0.1); /* Subtle border */
+  display: flex; /* Use flexbox for alignment */
+  align-items: center; /* Vertically align items */
+  gap: 10px; /* Space between icon (if added) and title */
+}
+
+.kard h3 {
+  margin: 0;
+  color: #116530;
+  font-size: 1.1rem; /* Smaller font size */
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: -0.3px; /* Adjusted letter spacing */
+}
+
+.kard-content {
+  padding: 20px 24px 24px 24px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.kard-content .info-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.kard-content .info-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+  font-size: 0.95rem;
+  color: #333;
+}
+
+.kard-content .info-list li:last-child {
+  border-bottom: none;
+}
+
+.kard-content .info-list li span:first-child {
+  font-weight: 600;
+  color: #116530;
+}
+
+.kard-content .info-list li span:last-child {
+  color: #666;
+}
+
+.kard-content .no-data {
+  text-align: center;
+  color: #777;
+  padding: 20px;
+}
+
+/* Specific styles for the announcement card */
+.announcement-kard .kard-content {
+  padding: 15px 20px;
+}
+
+.announcement-kard .kard-content ul {
+  list-style: none;
+  padding: 0;
+}
+
+.announcement-kard .kard-content .info-item {
+  background: #f9f9f9;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.announcement-kard .kard-content .info-item:last-child {
+  margin-bottom: 0;
+}
+
+.announcement-kard .kard-content .info-label {
+  font-weight: 600;
+  color: #116530;
+  font-size: 1rem;
+}
+
+.announcement-kard .kard-content .info-value {
+  color: #333;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.announcement-kard .kard-content .muted {
+  font-size: 0.75rem;
+  color: #666;
+  margin-top: 5px;
+}
+
+.announcement-kard .new-company-btn {
+  margin-top: 20px;
+  align-self: center;
+}
+
+/* Mobile Responsive for Kard */
+@media (max-width: 768px) {
+      .dashboard-cards-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+        margin-top: 20px;
+      }
+
+      .kard {
+        border-radius: 12px;
+        box-shadow: 0 2px 10px rgba(17, 101, 48, 0.1);
+      }
+
+      .kard-header {
+        padding: 15px 20px 10px 20px;
+      }
+
+      .kard h3 {
+        font-size: 1rem;
+      }
+
+      .kard-content {
+        padding: 15px 20px;
+        gap: 10px;
+      }
+
+      .kard-content .info-list li {
+        padding: 8px 0;
+        font-size: 0.9rem;
+      }
+
+      .announcement-kard .kard-content .info-item {
+        padding: 10px;
+        margin-bottom: 8px;
+      }
+
+      .announcement-kard .kard-content .info-label {
+        font-size: 0.95rem;
+      }
+
+      .announcement-kard .kard-content .info-value {
+        font-size: 0.85rem;
+      }
+
+      .announcement-kard .kard-content .muted {
+        font-size: 0.7rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .dashboard-cards-grid {
+        gap: 10px;
+        margin-top: 15px;
+      }
+
+      .kard {
+        border-radius: 10px;
+      }
+
+      .kard-header {
+        padding: 12px 15px 8px 15px;
+      }
+
+      .kard h3 {
+        font-size: 0.9rem;
+      }
+
+      .kard-content {
+        padding: 12px 15px;
+        gap: 8px;
+      }
+
+      .kard-content .info-list li {
+        padding: 6px 0;
+        font-size: 0.85rem;
+      }
+
+      .announcement-kard .kard-content .info-item {
+        padding: 8px;
+        margin-bottom: 6px;
+      }
+
+      .announcement-kard .kard-content .info-label {
+        font-size: 0.9rem;
+      }
+
+      .announcement-kard .kard-content .info-value {
+        font-size: 0.8rem;
+      }
+
+      .announcement-kard .kard-content .muted {
+        font-size: 0.65rem;
+      }
+    }
+  </style>
+</head>
+<body>
+<header>
+  <div class="header-left">
+    <!-- Hamburger Menu Button for Mobile -->
+    <button class="hamburger-btn" onclick="toggleSidebar()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <h2>
+      <img src="header.png" alt="Intern Icon" style="border-radius: 50%; margin-right: 5px;">
+      <div>
+        <span style="color: #DAA520; font-weight: 700; display: block; margin: 0 0 2px 0; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);">INTERNLINK</span>
+        <span style="color: #006400; font-weight: 700; display: block; margin: -5px 0 0 0; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);">UNIVERSIDAD DE MANILA</span>
+      </div>
+      </div>
+  <div class="nav-buttons">
+    <a href="#" class="home-link" onclick="goHome()">Home</a>
+
+    <div class="dropdown">
+      <button class="dropbtn">Profile▼</button>
+      <div class="dropdown-content">
+        <a href="#" onclick="showProfile()">Edit Profile</a>
+        <a href="logout.php">Log Out</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+  <div class="dashboard-wrapper">
+    <div class="sidebar">
+      <form action="update_profile_picture.php" method="POST" enctype="multipart/form-data" id="uploadForm">
+        <label for="profileInput">
+          <div class="profile-pic-container">
+            <img src="<?php echo htmlspecialchars($profile_picture); ?>" alt="Profile Picture" />
+            <div class="overlay">Change Picture</div>
+          </div>
+        </label>
+        <input type="file" id="profileInput" name="profile_picture" onchange="document.getElementById('uploadForm').submit();" />
+      </form>
+      <div class="student-name"><?php echo htmlspecialchars($firstname . ' ' . $lastname); ?></div>
+      <a href="#" onclick="showTab('internOverviewContent')">Intern Overview</a>
+      <a href="#" onclick="showTab('internAttendanceContent')">Intern Attendance</a>
+      <a href="#" onclick="showTab('internPerformanceContent')">Intern Performance</a>
+      <a href="#" onclick="showTab('messageContent')">Message</a>
+    </div>
+
+    <div class="main-content active" id="mainContent">
+      <h2 class="welcome-message">Welcome, <?php echo htmlspecialchars($firstname . ' ' . $lastname); ?>!</h2>
+
+      <div class="dashboard-cards-grid">
+        <!-- Most Interns in Progress -->
+        <div class="kard">
+          <div class="kard-header">
+            <h3>👩‍💻 Most Interns in Progress</h3>
+          </div>
+          <div id="mostInternsInProgress" class="kard-content info-list">Loading...</div>
+        </div>
+
+        <!-- Newest Submitted Tasks -->
+        <div class="kard">
+          <div class="kard-header">
+            <h3>🆕 Newest Submitted Tasks</h3>
+          </div>
+          <div id="newestSubmittedTasks" class="kard-content info-list">Loading...</div>
+        </div>
+
+        <!-- Newest Attendance Records Needing Validation -->
+        <div class="kard">
+          <div class="kard-header">
+            <h3>🕒 Newest Attendance Needing Validation</h3>
+          </div>
+          <div id="newestAttendanceValidation" class="kard-content info-list">Loading...</div>
+        </div>
+
+        <!-- Supervisor announcements will be loaded here -->
+        <div class="kard announcement-kard">
+          <div class="kard-header">
+            <h3>📢 Announcements</h3>
+          </div>
+          <div id="supervisorAnnouncementsContainer" class="kard-content">Loading announcements...</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="profile" id="profileContent">
+      <h2>Edit Profile</h2>
+      <form id="profileForm">
+        <?php foreach (['firstname','lastname','email','contact'] as $field): ?>
+        <div class="form-row">
+          <label><?= ucfirst($field) ?></label>
+          <input type="text" name="<?= $field ?>" id="<?= $field ?>" value="<?= htmlspecialchars($supervisor[$field]) ?>" disabled />
+          <span class="edit-icon" onclick="enableEdit('<?= $field ?>')">&#9998;</span>
+        </div>
+        <?php endforeach; ?>
+
+        <div class="form-row">
+          <label>Password</label>
+          <input type="password" id="password_display" value="******" disabled />
+          <span class="edit-icon" onclick="enablePassword()">&#9998;</span>
+        </div>
+        <div id="passwordFields" style="display:none;">
+          <div class="form-row">
+            <label>New Password</label>
+            <input type="password" name="password" id="password" />
+          </div>
+          <div class="form-row">
+            <label>Confirm</label>
+            <input type="password" id="confirm_password" />
+          </div>
+        </div>
+
+        <div class="action-buttons" id="actionButtons" style="display:none;">
+          <button type="button" class="save-btn" onclick="saveProfile()">Save Changes</button>
+          <button type="button" class="cancel-btn" onclick="cancelEdit()">Cancel</button>
+        </div>
+      </form>
+      <hr />
+      
+      <button class="back-btn" onclick="goHome()">Back</button>
+    </div>
+
+    <div class="tab-content" id="internOverviewContent">
+      <h2>Intern Overview</h2>
+      <input type="text" id="internSearch" class="search-bar" onkeyup="searchInterns()" placeholder="Search by name or ID..." title="Type in a name or ID">
+      <div class="interns-grid">
+        <?php if (empty($interns)): ?>
+          <p>No interns are currently assigned to you.</p>
+        <?php else: ?>
+          <?php foreach ($interns as $intern): ?>
+            <div class="company-card student-overview-card" 
+                 data-intern='<?php echo htmlspecialchars(json_encode($intern)); ?>' 
+                 onclick="showInternDetails(this)"
+                 data-name="<?php echo htmlspecialchars(strtolower($intern['firstname'] . ' ' . $intern['lastname'])); ?>"
+                 data-studentid="<?php echo htmlspecialchars($intern['studentid']); ?>">
+              <img src="<?php echo htmlspecialchars($intern['profile_picture']); ?>" alt="Profile Picture" class="profile-logo">
+              <h4><?php echo htmlspecialchars($intern['firstname'] . ' ' . $intern['lastname']); ?></h4>
+              <p><?php echo htmlspecialchars($intern['post_name'] ?? 'N/A'); ?></p>
+              <p><?php echo htmlspecialchars($intern['email']); ?></p>
+              
+              <div class="progress-circles-container">
+                <div class="progress-circle-container">
+                  <svg class="progress-ring" width="140" height="140">
+                    <circle class="progress-ring__circle-bg" stroke-width="10" fill="transparent" r="60" cx="70" cy="70"/>
+                    <circle id="attendance-circle-<?php echo $intern['student_id']; ?>" class="progress-ring__circle <?php echo getProgressBarClass($intern['attendance']); ?>" stroke-width="10" fill="transparent" r="60" cx="70" cy="70"/>
+                  </svg>
+                  <span class="progress-text"><?php echo round(floatval(str_replace('%', '', $intern['attendance']))); ?>%</span>
+                  <label>Attendance</label>
+                </div>
+                <div class="progress-circle-container">
+                  <svg class="progress-ring" width="140" height="140">
+                    <circle class="progress-ring__circle-bg" stroke-width="10" fill="transparent" r="60" cx="70" cy="70"/>
+                    <circle id="performance-circle-<?php echo $intern['student_id']; ?>" class="progress-ring__circle <?php echo getProgressBarClass($intern['performance']); ?>" stroke-width="10" fill="transparent" r="60" cx="70" cy="70"/>
+                  </svg>
+                  <span class="progress-text"><?php echo round(floatval(str_replace('%', '', $intern['performance']))); ?>%</span>
+                  <label>Performance</label>
+                </div>
+              </div>
+              <?php if ($intern['employment_status'] === 'completed'): ?>
+                <button class="give-feedback-btn" data-student-id="<?php echo $intern['student_id']; ?>" data-student-name="<?php echo htmlspecialchars($intern['firstname'] . ' ' . $intern['lastname']); ?>" <?php echo ($intern['supervisor_feedback_given'] > 0) ? 'disabled' : ''; ?>>
+                  <?php echo ($intern['supervisor_feedback_given'] > 0) ? 'Feedback Submitted' : 'Give Feedback'; ?>
+                </button>
+              <?php endif; ?>
+            </div>
+          <?php endforeach; ?>
+        <?php endif; ?>
+      </div>
+    </div>
+
+    <div class="tab-content" id="internAttendanceContent">
+      <h2>Intern Attendance Overview</h2>
+      <input type="text" id="internAttendanceSearch" class="search-bar" onkeyup="filterAttendanceStudents()" placeholder="Search by name or ID...">
+      <div class="companies-grid student-attendance-grid" id="studentAttendanceGrid">
+        <?php
+        $attendance_query = "
+            SELECT 
+                s.student_id, s.studentid, s.firstname, s.lastname, s.section, s.profile_picture, s.email,
+                p.internship_title as post_name
+            FROM student s
+            LEFT JOIN internship_posts p ON s.post_id = p.post_id
+            WHERE s.supervisor_id = ?
+            ORDER BY s.lastname, s.firstname
+        ";
+        $attendance_stmt = $conn->prepare($attendance_query);
+        $attendance_stmt->bind_param("i", $userId);
+        $attendance_stmt->execute();
+        $attendance_res = $attendance_stmt->get_result();
+
+        if ($attendance_res && $attendance_res->num_rows > 0) {
+          while ($student = $attendance_res->fetch_assoc()) {
+            $student_picture = 'uploads/dp.jpg';
+            if (!empty($student['profile_picture']) && file_exists($student['profile_picture'])) {
+              $student_picture = $student['profile_picture'];
+            }
+
+            // Calculate attendance percentage for each student
+            $totalHours = 0;
+            $stmt_hours = $conn->prepare("SELECT time_in, time_out FROM timecard WHERE student_id = ? AND status = 'Validated'");
+            $stmt_hours->bind_param("i", $student['student_id']);
+            $stmt_hours->execute();
+            $result_hours = $stmt_hours->get_result();
+            while ($row_hours = $result_hours->fetch_assoc()) {
+                if (!empty($row_hours['time_in']) && !empty($row_hours['time_out'])) {
+                    $in = new DateTime($row_hours['time_in']);
+                    $out = new DateTime($row_hours['time_out']);
+                    $diff = $in->diff($out);
+                    $hours = $diff->h + ($diff->days * 24) + ($diff->i / 60);
+                    $totalHours += $hours;
+                }
+            }
+            $stmt_hours->close();
+            
+            $targetHours = 200; // Assuming a 200-hour target
+            $progressPercent = min(100, ($totalHours / $targetHours) * 100);
+        ?>
+            <div class="company-card" 
+                 onclick="showStudentAttendanceDetails(<?php echo $student['student_id']; ?>)"
+                 data-name="<?php echo htmlspecialchars(strtolower($student['firstname'] . ' ' . $student['lastname'])); ?>"
+                 data-studentid="<?php echo htmlspecialchars($student['studentid']); ?>">
+              <img src="<?php echo htmlspecialchars($student_picture); ?>" alt="Student Picture" class="profile-logo">
+              <h4><?php echo htmlspecialchars($student['firstname'] . ' ' . $student['lastname']); ?></h4>
+              <p><?php echo htmlspecialchars($student['email']); ?></p>
+              <p><?php echo htmlspecialchars($student['post_name'] ?? 'N/A'); ?></p>
+              <div class="progress-bar-container">
+                <div class="progress-bar-bg">
+                  <div class="progress-bar-fill <?php echo getProgressBarClass($progressPercent); ?>" style="width: <?php echo $progressPercent; ?>%;"></div>
+                </div>
+                <span class="progress-value"><?php echo round($totalHours, 1); ?> / <?php echo $targetHours; ?> hrs</span>
+                <label>Attendance</label>
+              </div>
+            </div>
+        <?php
+          }
+        } else {
+          echo '<p>No students found.</p>';
+        }
+        $attendance_stmt->close();
+        ?>
+      </div>
+    </div>
+
+    <div class="tab-content" id="internPerformanceContent">
+      <h2>Intern Performance</h2>
+      <input type="text" id="performanceSearch" class="search-bar" onkeyup="searchPerformanceInterns()" placeholder="Search by name or ID..." title="Type in a name or ID">
+      <div class="interns-grid">
+        <?php if (empty($interns)): ?>
+          <p>No interns are currently assigned to you.</p>
+        <?php else: ?>
+          <?php foreach ($interns as $intern): ?>
+            <div class="company-card"
+                 data-name="<?php echo htmlspecialchars(strtolower($intern['firstname'] . ' ' . $intern['lastname'])); ?>"
+                 data-studentid="<?php echo htmlspecialchars($intern['studentid']); ?>">
+              <img src="<?php echo htmlspecialchars($intern['profile_picture']); ?>" alt="Profile Picture" class="profile-logo">
+              <h4><?php echo htmlspecialchars($intern['firstname'] . ' ' . $intern['lastname']); ?></h4>
+              <p><?php echo htmlspecialchars($intern['email']); ?></p>
+              <div class="progress-circles-container">
+                <div class="progress-circle-container">
+                  <svg class="progress-ring" width="140" height="140">
+                    <circle class="progress-ring__circle-bg" stroke-width="10" fill="transparent" r="60" cx="70" cy="70"/>
+                    <circle id="performance-circle-perf-<?php echo $intern['student_id']; ?>" class="progress-ring__circle <?php echo getProgressBarClass($intern['performance']); ?>" stroke-width="10" fill="transparent" r="60" cx="70" cy="70"/>
+                  </svg>
+                  <span class="progress-text"><?php echo round(floatval(str_replace('%', '', $intern['performance']))); ?>%</span>
+                  <label>Performance</label>
+                </div>
+              </div>
+              <div class="company-card-buttons">
+                <button onclick="assignTask(<?php echo $intern['student_id']; ?>)">Assign Task</button>
+                <button class="secondary" onclick="viewTasks(<?php echo $intern['student_id']; ?>)">View Tasks</button>
+              </div>
+            </div>
+          <?php endforeach; ?>
+        <?php endif; ?>
+      </div>
+    </div>
+
+    <div class="tab-content" id="assignTasksContent">
+      <h2>Assign Tasks</h2>
+      <form id="assignTaskForm">
+        <div class="form-group">
+          <label for="student_id">Select Student:</label>
+          <select name="student_id" id="student_id" required>
+            <option value="">Choose an intern...</option>
+            <?php foreach ($interns as $intern): ?>
+              <option value="<?php echo $intern['student_id']; ?>">
+                <?php echo htmlspecialchars($intern['firstname'] . ' ' . $intern['lastname']); ?>
+              </option>
+            <?php endforeach; ?>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="title">Task Title:</label>
+          <input type="text" name="title" id="title" required placeholder="Enter task title">
+        </div>
+        <div class="form-group">
+          <label for="description">Description:</label>
+          <textarea name="description" id="description" rows="4" placeholder="Enter task description"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="due_date">Due Date:</label>
+          <input type="date" name="due_date" id="due_date">
+        </div>
+        <button type="submit">Assign Task</button>
+      </form>
+      <?php if (empty($interns)): ?>
+        <p>No interns assigned to you yet.</p>
+      <?php endif; ?>
+      <button class="back-btn" onclick="showTab('internPerformanceContent')">Back</button>
+    </div>
+
+    <div class="main-content" id="viewTasksContent">
+        <h2 id="internTasksTitle">Intern Tasks</h2>
+        <div class="task-filters">
+            <button class="task-filter-btn active" onclick="filterTasks('all')">All</button>
+            <button class="task-filter-btn" onclick="filterTasks('assigned')">Assigned</button>
+            <button class="task-filter-btn" onclick="filterTasks('submitted')">Submitted</button>
+            <button class="task-filter-btn" onclick="filterTasks('completed')">Completed</button>
+            <button class="task-filter-btn" onclick="filterTasks('missed')">Missed</button>
+        </div>
+        <div id="tasksListContainer" class="tasks-list">
+            <p>Select a filter to view tasks.</p>
+        </div>
+        <button class="back-btn" onclick="showTab('internPerformanceContent')">Back</button>
+    </div>
+
+    <div class="tab-content" id="messageContent">
+      <div class="messaging-container">
+        <!-- Conversations List -->
+        <div class="conversations-list">
+          <div class="conversations-header">
+            <h3>Messages</h3>
+            <button class="new-chat-btn" id="newChatBtn">New Chat</button>
+          </div>
+          <div class="conversations-body">
+            <div id="conversations">
+              <div class="loading">Loading conversations...</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Chat Area -->
+        <div class="chat-area">
+          <div class="chat-header">
+            <button class="back-to-conversations" onclick="showConversationsList()">← Back</button>
+            <h3 id="chat-title">Select a conversation</h3>
+            <div class="chat-actions">
+              <!-- Future: Add video call, phone call buttons here -->
+            </div>
+          </div>
+          
+          <div class="messages" id="messages">
+            <div class="no-conversation-selected">
+              <div style="text-align: center; color: #666; padding: 40px;">
+                <h4>Welcome to Messages</h4>
+                <p>Select a conversation from the left to start chatting, or click "New Chat" to start a new conversation.</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="message-input">
+            <input 
+              type="text" 
+              id="messageText" 
+              placeholder="Type a message..." 
+              maxlength="500"
+              disabled
+            >
+            <button id="sendBtn" disabled>Send</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!-- New Chat Modal -->
+<div id="newChatModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3>Start New Conversation</h3>
+      <button class="close-modal" onclick="hideNewChatModal()">&times;</button>
+    </div>
+    <div class="modal-body">
+      <input 
+        type="text" 
+        id="userSearchInput" 
+        class="search-input" 
+        placeholder="Search for students, faculty, supervisors, or companies..."
+        autocomplete="off"
+      >
+      <div id="searchResults" class="search-results">
+        <div class="search-placeholder">
+          Type at least 2 characters to search for users
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Feedback Modal -->
+<div id="feedbackModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3>Give Feedback for <span id="feedbackStudentName"></span></h3>
+      <button class="close-btn" onclick="closeFeedbackModal()">&times;</button>
+    </div>
+    <div class="modal-body">
+      <form id="feedbackForm">
+        <input type="hidden" id="feedbackStudentId" name="student_id">
+        <input type="hidden" id="feedbackGivenBy" name="given_by" value="supervisor">
+        
+        <label for="feedbackMessage">Feedback Message:</label>
+        <textarea id="feedbackMessage" name="feedback_message" rows="5" required></textarea>
+        
+        <button type="submit" class="save-btn">Submit Feedback</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Intern Details Modal -->
+<div id="internDetailsModal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn" onclick="closeInternDetailsModal()">&times;</span>
+    <div id="internDetailsBody">
+      <!-- Details will be populated by JS -->
+    </div>
+  </div>
+</div>
+
+<!-- Student Attendance Details Modal -->
+<div id="studentAttendanceModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1002; justify-content: center; align-items: center;">
+  <div style="background: white; padding: 20px; border-radius: 10px; width: 90%; max-width: 900px;">
+    <h3>Student Attendance Details</h3>
+    <div id="studentAttendanceModalBody"></div>
+    <button onclick="document.getElementById('studentAttendanceModal').style.display = 'none'" style="padding: 10px 20px; background: #ccc; border: none; border-radius: 5px; cursor: pointer; margin-top: 20px;">Close</button>
+  </div>
+</div>
+
+<!-- Resume Summary Modal -->
+<div id="resumeModal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn" onclick="closeResumeModal()">&times;</span>
+    <div id="resumeBody">
+      <!-- Resume summary will be populated by JS -->
+    </div>
+  </div>
+</div>
+
+<!-- Image Modal -->
+<div id="imageModal" class="modal" onclick="closeImageModal()">
+  <div class="modal-content">
+    <img id="modalImage" src="" alt="Enlarged Selfie">
+  </div>
+</div>
+
+<script>
+    // Function to load and display supervisor announcements
+    async function loadSupervisorAnnouncements() {
+      const announcementsContainer = document.getElementById('supervisorAnnouncementsContainer');
+      if (!announcementsContainer) return;
+
+      announcementsContainer.innerHTML = '<p>Loading announcements...</p>';
+
+      try {
+        const response = await fetch('fetch_announcements.php?audience=supervisor'); // Use the generic fetch_announcements.php
+        const data = await response.json();
+
+        if (data.success) {
+          if (data.announcements.length > 0) {
+            let html = '<ul>'; // Wrap in ul as per .kard-content .info-list ul
+            data.announcements.forEach(announcement => {
+              html += `
+                <li class="info-item">
+                  <div class="info-label">${escapeHtml(announcement.title)}</div>
+                  <div class="info-value">${escapeHtml(announcement.content)}</div>
+                  <div class="muted"><strong>Posted by:</strong> ${escapeHtml(announcement.faculty_name)}</div>
+                  <div class="muted"><strong>Date:</strong> ${new Date(announcement.date_posted).toLocaleString()}</div>
+                </li>
+              `;
+            });
+            html += '</ul>';
+            announcementsContainer.innerHTML = html;
+          } else {
+            announcementsContainer.innerHTML = '<p>No announcements for supervisors at this time.</p>';
+          }
+        } else {
+          announcementsContainer.innerHTML = `<p>Error loading announcements: ${data.message || 'Unknown error'}</p>`;
+        }
+      } catch (error) {
+        console.error('Error fetching supervisor announcements:', error);
+        announcementsContainer.innerHTML = '<p>Error loading announcements.</p>';
+      }
+    }
+
+    // Function to load and display "Most Interns in Progress"
+    async function loadMostInternsInProgress() {
+      const container = document.getElementById('mostInternsInProgress');
+      if (!container) return;
+
+      container.innerHTML = '<p class="no-data">Loading...</p>';
+
+      try {
+        const response = await fetch('fetch_dashboard_data.php?action=most_interns_in_progress');
+        const data = await response.json();
+
+        if (data.success) {
+          if (data.interns && data.interns.length > 0) {
+            let html = '<ul>';
+            data.interns.forEach(intern => {
+              const profilePic = intern.profile_picture && intern.profile_picture !== '' ? intern.profile_picture : 'uploads/dp.jpg';
+              html += `
+                <li>
+                  <div style="display: flex; align-items: center; gap: 10px;">
+                    <img src="${escapeHtml(profilePic)}" alt="Profile" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;">
+                    <span>${escapeHtml(intern.firstname)} ${escapeHtml(intern.lastname)}</span>
+                  </div>
+                  <span>${escapeHtml(intern.overall_average)}% - ${escapeHtml(intern.company_name || 'N/A')}</span>
+                </li>
+              `;
+            });
+            html += '</ul>';
+            container.innerHTML = html;
+          } else {
+            container.innerHTML = '<p class="no-data">No interns in progress found.</p>';
+          }
+        } else {
+          container.innerHTML = `<p class="no-data">Error: ${data.message || 'Unknown error'}</p>`;
+        }
+      } catch (error) {
+        console.error('Error fetching most interns in progress:', error);
+        container.innerHTML = '<p class="no-data">Error loading data.</p>';
+      }
+    }
+
+    // Function to load and display "Newest Submitted Tasks"
+    async function loadNewestSubmittedTasks() {
+      const container = document.getElementById('newestSubmittedTasks');
+      if (!container) return;
+
+      container.innerHTML = '<p class="no-data">Loading...</p>';
+
+      try {
+        const response = await fetch('fetch_dashboard_data.php?action=newest_submitted_tasks');
+        const data = await response.json();
+
+        if (data.success) {
+          if (data.tasks && data.tasks.length > 0) {
+            let html = '<ul>';
+            data.tasks.forEach(task => {
+              html += `
+                <li>
+                  <div style="display: flex; align-items: center; gap: 10px;">
+                    <span>${escapeHtml(task.student_name)}</span>
+                  </div>
+                  <span>${escapeHtml(task.task_title)} - ${new Date(task.submission_date).toLocaleDateString()}</span>
+                </li>
+              `;
+            });
+            html += '</ul>';
+            container.innerHTML = html;
+          } else {
+            container.innerHTML = '<p class="no-data">No newest submitted tasks found.</p>';
+          }
+        } else {
+          container.innerHTML = `<p class="no-data">Error: ${data.message || 'Unknown error'}</p>`;
+        }
+      } catch (error) {
+        console.error('Error fetching newest submitted tasks:', error);
+        container.innerHTML = '<p class="no-data">Error loading data.</p>';
+      }
+    }
+
+    // Function to load and display "Newest Attendance Needing Validation"
+    async function loadNewestAttendanceValidation() {
+      const container = document.getElementById('newestAttendanceValidation');
+      if (!container) return;
+
+      container.innerHTML = '<p class="no-data">Loading...</p>';
+
+      try {
+        const response = await fetch('fetch_dashboard_data.php?action=newest_attendance_validation');
+        const data = await response.json();
+
+        if (data.success) {
+          if (data.attendance && data.attendance.length > 0) {
+            let html = '<ul>';
+            data.attendance.forEach(record => {
+              const timeIn = record.time_in ? new Date(record.time_in).toLocaleTimeString() : 'N/A';
+              const timeOut = record.time_out ? new Date(record.time_out).toLocaleTimeString() : 'N/A';
+              html += `
+                <li>
+                  <div style="display: flex; align-items: center; gap: 10px;">
+                    <span>${escapeHtml(record.student_name)}</span>
+                  </div>
+                  <span>${timeIn} - ${timeOut} (${escapeHtml(record.status)})</span>
+                </li>
+              `;
+            });
+            html += '</ul>';
+            container.innerHTML = html;
+          } else {
+            container.innerHTML = '<p class="no-data">No attendance needing validation found.</p>';
+          }
+        } else {
+          container.innerHTML = `<p class="no-data">Error: ${data.message || 'Unknown error'}</p>`;
+        }
+      } catch (error) {
+        console.error('Error fetching newest attendance validation:', error);
+        container.innerHTML = '<p class="no-data">Error loading data.</p>';
+      }
+    }
+
+    // Override showTab to include dashboard data loading for mainContent
+    const originalShowTab = showTab;
+    showTab = function(tabId) {
+      originalShowTab(tabId);
+      if (tabId === 'mainContent') {
+        loadSupervisorAnnouncements();
+        loadMostInternsInProgress();
+        loadNewestSubmittedTasks();
+        loadNewestAttendanceValidation();
+      }
+    };
+
+    // Initial load if mainContent is active by default
+    document.addEventListener('DOMContentLoaded', () => {
+      if (document.getElementById('mainContent').classList.contains('active')) {
+        loadSupervisorAnnouncements();
+        loadMostInternsInProgress();
+        loadNewestSubmittedTasks();
+        loadNewestAttendanceValidation();
+      }
+    });
+
+function showTab(tabId) {
+  document.querySelectorAll('.main-content, .profile, .tab-content').forEach(c => c.classList.remove('active'));
+  const tab = document.getElementById(tabId);
+  if (tab) {
+    tab.classList.add('active');
+  }
+
+  if (tabId === "messageContent") {
+    // Clean up any existing messaging state
+    if (typeof cleanupMessaging === 'function') {
+      cleanupMessaging();
+    }
+
+    // Initialize messaging with improved functionality
+    setTimeout(() => {
+      if (typeof initializeMessaging === 'function') {
+        initializeMessaging();
+      } else {
+        // Fallback to original messaging functions
+        loadConversations();
+      }
+    }, 100);
+  } else {
+    // Clean up messaging when leaving the tab
+    if (typeof cleanupMessaging === 'function') {
+      cleanupMessaging();
+    }
+  }
+}
+
+function filterAttendanceStudents() {
+  const searchInput = document.getElementById('internAttendanceSearch').value.toLowerCase();
+  const studentCards = document.querySelectorAll('#studentAttendanceGrid .company-card');
+
+  studentCards.forEach(card => {
+    const name = card.dataset.name;
+    const studentid = card.dataset.studentid;
+
+    const searchMatch = name.includes(searchInput) || studentid.includes(searchInput);
+
+    if (searchMatch) {
+      card.style.display = '';
+    } else {
+      card.style.display = 'none';
+    }
+  });
+}
+
+function showStudentAttendanceDetails(studentId) {
+  const modal = document.getElementById('studentAttendanceModal');
+  const modalBody = document.getElementById('studentAttendanceModalBody');
+  modalBody.innerHTML = '<p>Loading attendance details...</p>';
+  modal.style.display = 'flex';
+
+  fetch(`fetch_student_attendance.php?student_id=${studentId}`)
+    .then(response => response.json())
+    .then(data => {
+      if (data.success) {
+        let html = `
+          <div style="display: flex; align-items: center; gap: 20px; margin-bottom: 20px;">
+            <img src="${data.profile_picture}" alt="Student Picture" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover;">
+            <div>
+              <h4>${data.student_name}</h4>
+              <p>${data.email}</p>
+              <p>${data.post_name}</p>
+            </div>
+          </div>
+          <div class="attendance-tracker">
+            <div class="calendar-section">
+              <div class="calendar-header">
+                <button id="prevMonthBtn" onclick="changeMonth(-1, ${studentId})"><</button>
+                <h3 id="monthYearText"></h3>
+                <button id="nextMonthBtn" onclick="changeMonth(1, ${studentId})">></button>
+              </div>
+              <div id="attendanceCalendar"></div>
+            </div>
+            <div class="log-section">
+              <h3>Logs for <span id="selectedDateText">[Select a date]</span></h3>
+              <div id="logsContainer" class="modern-logs-container">
+                <p class="no-logs-message">Select a date to view logs.</p>
+              </div>
+            </div>
+          </div>
+        `;
+        modalBody.innerHTML = html;
+        initializeCalendar(studentId, new Date());
+      } else {
+        modalBody.innerHTML = `<p>${data.message || 'Error loading attendance details'}</p>`;
+      }
+    })
+    .catch(error => {
+      console.error('Error fetching attendance details:', error);
+      modalBody.innerHTML = '<p>Error loading attendance details</p>';
+    });
+}
+
+let currentCalendarDate = new Date();
+
+function changeMonth(offset, studentId) {
+    currentCalendarDate.setMonth(currentCalendarDate.getMonth() + offset);
+    initializeCalendar(studentId, currentCalendarDate);
+}
+
+function initializeCalendar(studentId, date) {
+    const calendarContainer = document.getElementById("attendanceCalendar");
+    const monthYearText = document.getElementById("monthYearText");
+    
+    const year = date.getFullYear();
+    const month = date.getMonth();
+
+    monthYearText.textContent = date.toLocaleString('default', { month: 'long', year: 'numeric' });
+
+    fetch(`fetch_student_attendance.php?student_id=${studentId}&month=${month + 1}&year=${year}`)
+        .then(response => response.json())
+        .then(data => {
+            if(data.success) {
+                renderCalendar(year, month, data.logs);
+            }
+        });
+}
+
+function renderCalendar(year, month, logs) {
+    const calendarContainer = document.getElementById("attendanceCalendar");
+    const firstDay = new Date(year, month, 1).getDay();
+    const lastDate = new Date(year, month + 1, 0).getDate();
+
+    let html = "<table><thead><tr>";
+    const days = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+    days.forEach(d => html += `<th>${d}</th>`);
+    html += "</tr></thead><tbody><tr>";
+
+    for (let i = 0; i < firstDay; i++) {
+      html += "<td></td>";
+    }
+
+    for (let d = 1; d <= lastDate; d++) {
+      const fullDate = `${year}-${String(month+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+      const logData = logs.find(log => log.date === fullDate);
+      let cellClass = '';
+      if (logData) {
+          cellClass = 'day-with-log';
+      }
+
+      html += `<td class="${cellClass}" data-date="${fullDate}">${d}</td>`;
+      if ((firstDay + d) % 7 === 0) html += "</tr><tr>";
+    }
+
+    html += "</tr></tbody></table>";
+    calendarContainer.innerHTML = html;
+
+    calendarContainer.querySelectorAll("td[data-date]").forEach(td => {
+      td.addEventListener("click", () => {
+        calendarContainer.querySelectorAll("td.selected").forEach(x => x.classList.remove("selected"));
+        td.classList.add("selected");
+        displayLogsForDate(td.dataset.date, logs);
+      });
+    });
+}
+
+function displayLogsForDate(date, allLogs) {
+    const selectedDateText = document.getElementById("selectedDateText");
+    const logsContainer = document.getElementById('logsContainer');
+    selectedDateText.textContent = new Date(date + 'T00:00:00').toLocaleDateString([], { year: 'numeric', month: 'long', day: 'numeric' });
+    
+    const logsForDate = allLogs.filter(log => log.date === date);
+    logsContainer.innerHTML = '';
+
+    if (logsForDate.length === 0) {
+        logsContainer.innerHTML = `<p class="no-logs-message">No logs found for this date.</p>`;
+    } else {
+        logsForDate.forEach(log => {
+            const timeIn = log.time_in ? new Date(log.time_in).toLocaleTimeString() : 'N/A';
+            const timeOut = log.time_out ? new Date(log.time_out).toLocaleTimeString() : 'N/A';
+            const selfieIn = log.time_in_selfie ? `<img src="${log.time_in_selfie}" alt="Time-in Selfie" class="log-selfie" onclick="showImageModal('${log.time_in_selfie}')" style="cursor: pointer;">` : '<div class="no-selfie-placeholder">No Selfie</div>';
+            const selfieOut = log.time_out_selfie ? `<img src="${log.time_out_selfie}" alt="Time-out Selfie" class="log-selfie" onclick="showImageModal('${log.time_out_selfie}')" style="cursor: pointer;">` : '<div class="no-selfie-placeholder">No Selfie</div>';
+            
+            let validationButton = '';
+            if (log.status === 'Validated') {
+                validationButton = '<span class="validated-status">Validated</span>';
+            } else {
+                validationButton = `<button class="validate-btn" onclick="validateTimecard(${log.timecard_id}, this)">Validate</button>`;
+            }
+
+            const logCard = `
+              <div class="log-card" id="timecard-${log.timecard_id}">
+                <div class="log-time-section">
+                  <strong>Time In</strong>
+                  <p>${timeIn}</p>
+                  ${selfieIn}
+                </div>
+                <div class="log-time-section">
+                  <strong>Time Out</strong>
+                  <p>${timeOut}</p>
+                  ${selfieOut}
+                </div>
+                <div class="log-validation-section">
+                  ${validationButton}
+                </div>
+              </div>
+            `;
+            logsContainer.innerHTML += logCard;
+        });
+    }
+}
+
+function validateTimecard(timecardId, buttonElement) {
+    buttonElement.disabled = true;
+    buttonElement.textContent = 'Validating...';
+
+    fetch('validate_timecard.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: `timecard_id=${timecardId}`
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            buttonElement.outerHTML = '<span class="validated-status">Validated</span>';
+        } else {
+            alert('Failed to validate: ' + data.message);
+            buttonElement.disabled = false;
+            buttonElement.textContent = 'Validate';
+        }
+    })
+    .catch(error => {
+        console.error('Validation error:', error);
+        alert('An error occurred during validation.');
+        buttonElement.disabled = false;
+        buttonElement.textContent = 'Validate';
+    });
+}
+
+function openFeedbackModal(studentId, studentName) {
+  document.getElementById('feedbackStudentId').value = studentId;
+  document.getElementById('feedbackStudentName').textContent = studentName;
+  document.getElementById('feedbackModal').style.display = 'flex';
+}
+
+function closeFeedbackModal() {
+  document.getElementById('feedbackModal').style.display = 'none';
+  document.getElementById('feedbackForm').reset(); // Clear form fields
+}
+
+function showImageModal(src) {
+  document.getElementById('modalImage').src = src;
+  document.getElementById('imageModal').style.display = 'flex';
+}
+
+function closeImageModal() {
+  document.getElementById('imageModal').style.display = 'none';
+}
+
+const currentUserId = <?php echo json_encode((int)$userId); ?>;
+
+// Utility functions (moved to top for scope)
+function escapeHtml(text) {
+  const div = document.createElement('div');
+  div.textContent = text;
+  return div.innerHTML;
+}
+
+function getTimeAgo(dateString) {
+  const now = new Date();
+  const date = new Date(dateString);
+  const diffMs = now - date;
+  const diffMins = Math.floor(diffMs / 60000);
+  const diffHours = Math.floor(diffMs / 3600000);
+  const diffDays = Math.floor(diffMs / 86400000);
+  
+  if (diffMins < 1) return 'Just now';
+  if (diffMins < 60) return `${diffMins}m ago`;
+  if (diffHours < 24) return `${diffHours}h ago`;
+  if (diffDays < 7) return `${diffDays}d ago`;
+  return date.toLocaleDateString();
+}
+
+function debounce(func, wait) {
+  let timeout;
+  return function executedFunction(...args) {
+    const later = () => {
+      clearTimeout(timeout);
+      func(...args);
+    };
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+  };
+}
+
+function showError(message) {
+  console.error(message);
+  alert(message);
+}
+
+// Improved messaging functionality
+var currentConversation = null; // Changed from let to var
+var messageRefreshInterval = null; // Changed from let to var
+var conversationRefreshInterval = null; // Changed from let to var
+var isSendingMessage = false; // Changed from let to var
+
+// Initialize messaging when tab is shown
+function initializeMessaging() {
+  loadConversations();
+  startAutoRefresh();
+  setupEventListeners();
+}
+
+// Setup event listeners
+function setupEventListeners() {
+  const sendBtn = document.getElementById('sendBtn');
+  const messageInput = document.getElementById('messageText');
+  const newChatBtn = document.getElementById('newChatBtn');
+  const searchInput = document.getElementById('userSearchInput');
+
+  if (sendBtn) {
+    sendBtn.addEventListener('click', sendMessage);
+  }
+
+  if (messageInput) {
+    messageInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        sendMessage();
+      }
+    });
+  }
+
+  if (newChatBtn) {
+    newChatBtn.addEventListener('click', showNewChatModal);
+  }
+
+  if (searchInput) {
+    searchInput.addEventListener('input', debounce(searchUsers, 300));
+  }
+}
+
+// Load conversations with unread count
+function loadConversations() {
+  fetch('fetch_messages.php?action=conversations&user_type=supervisor')
+    .then(res => res.json())
+    .then(data => {
+      if (data.success) {
+        displayConversations(data.conversations);
+      } else {
+        showError('Error loading conversations');
+      }
+    })
+    .catch(() => showError('Error loading conversations'));
+}
+
+// Display conversations with unread indicators
+function displayConversations(conversations) {
+  const container = document.getElementById('conversations');
+  if (!container) return;
+  
+  container.innerHTML = '';
+
+  if (conversations.length === 0) {
+    container.innerHTML = '<p class="no-conversations">No conversations yet. <button onclick="showNewChatModal()" class="start-chat-btn">Start a chat</button></p>';
+    return;
+  }
+
+  conversations.forEach(conv => {
+    const div = document.createElement('div');
+    div.className = 'conversation-item';
+    if (conv.unread_count && conv.unread_count > 0) {
+      div.classList.add('unread');
+    }
+    
+    const timeAgo = conv.last_time ? getTimeAgo(conv.last_time) : '';
+    const unreadBadge = (conv.unread_count && conv.unread_count > 0) ? `<span class="unread-badge">${conv.unread_count}</span>` : '';
+    
+    div.innerHTML = `
+      <div class="conversation-header">
+        <strong class="contact-name">${escapeHtml(conv.name)}</strong>
+        <span class="conversation-time">${timeAgo}</span>
+        ${unreadBadge}
+      </div>
+      <div class="last-message">${escapeHtml(conv.last_message || 'No messages')}</div>
+    `;
+    
+    div.onclick = () => selectConversation(conv.other_type, conv.other_id, conv.name);
+    container.appendChild(div);
+  });
+}
+
+// Select conversation and load messages
+function selectConversation(other_type, other_id, name) {
+  currentConversation = { other_type, other_id, name };
+  const chatTitle = document.getElementById('chat-title');
+  if (chatTitle) {
+    chatTitle.textContent = `Chat with ${name}`;
+  }
+  
+  // Update UI to show selected conversation
+  document.querySelectorAll('.conversation-item').forEach(item => {
+    item.classList.remove('active');
+  });
+  
+  // Enable message input
+  const messageInput = document.getElementById('messageText');
+  const sendBtn = document.getElementById('sendBtn');
+  if (messageInput) messageInput.disabled = false;
+  if (sendBtn) sendBtn.disabled = false;
+  
+  loadMessages();
+  showChatArea();
+}
+
+// Load messages for current conversation
+function loadMessages() {
+  if (!currentConversation) return;
+  
+  const { other_type, other_id } = currentConversation;
+  console.log('Loading messages for conversation:', other_type, other_id);
+  fetch(`fetch_messages.php?action=messages&other_type=${other_type}&other_id=${other_id}&user_type=supervisor`)
+    .then(res => {
+      if (!res.ok) {
+        console.error('Network response was not ok:', res.statusText);
+        throw new Error('Network response was not ok');
+      }
+      return res.json();
+    })
+    .then(data => {
+      console.log('Messages fetch response:', data);
+      if (data.success) {
+        displayMessages(data.messages);
+        // Refresh conversations to update unread count
+        loadConversations();
+      } else {
+        showError('Error loading messages: ' + (data.message || 'Unknown error'));
+      }
+    })
+    .catch(error => {
+      console.error('Error loading messages:', error);
+      showError('Error loading messages');
+    });
+}
+
+// Display messages with better formatting
+function displayMessages(messages) {
+  console.log('Displaying messages:', messages);
+  const container = document.getElementById('messages');
+  container.innerHTML = '';
+  
+  if (messages.length === 0) {
+    container.innerHTML = '<div class="no-messages">No messages yet. Start the conversation!</div>';
+    return;
+  }
+  
+  messages.forEach(msg => {
+    const div = document.createElement('div');
+    // Determine if the message is sent by current user
+    const isSent = msg.sender_id === currentUserId;
+    div.className = `message ${isSent ? 'sent' : 'received'}`;
+    
+    const time = new Date(msg.sent_at).toLocaleString();
+    const readStatus = isSent ? (msg.is_read ? '✓✓' : '✓') : '';
+    
+    div.innerHTML = `
+      <div class="message-content">${escapeHtml(msg.message)}</div>
+      <div class="message-meta">
+        <span class="message-time">${time}</span>
+        <span class="read-status">${readStatus}</span>
+      </div>
+    `;
+    
+    container.appendChild(div);
+  });
+  
+  // Scroll to bottom
+  container.scrollTop = container.scrollHeight;
+}
+
+// Send message with better error handling
+function sendMessage() {
+  const input = document.getElementById('messageText');
+  const message = input.value.trim();
+  
+  if (!message || !currentConversation) {
+    return;
+  }
+  
+  if (message.length > 500) {
+    showError('Message too long. Maximum 500 characters.');
+    return;
+  }
+  
+  if (isSendingMessage) {
+    // Prevent duplicate sends
+    return;
+  }
+  isSendingMessage = true;
+  
+  const { other_type, other_id } = currentConversation;
+  const formData = new FormData();
+  formData.append('other_type', other_type);
+  formData.append('other_id', other_id);
+  formData.append('message', message);
+  formData.append('sender_type', 'supervisor');
+  
+  // Disable send button temporarily
+  const sendBtn = document.getElementById('sendBtn');
+  sendBtn.disabled = true;
+  sendBtn.textContent = 'Sending...';
+  
+  fetch('send_message.php', { method: 'POST', body: formData })
+    .then(res => res.json())
+    .then(data => {
+      if (data.success) {
+        input.value = '';
+        loadMessages();
+        loadConversations();
+      } else {
+        showError('Error: ' + data.message);
+      }
+    })
+    .catch(() => showError('Error sending message'))
+    .finally(() => {
+      sendBtn.disabled = false;
+      sendBtn.textContent = 'Send';
+      isSendingMessage = false;
+    });
+}
+
+// Show new chat modal
+function showNewChatModal() {
+  const modal = document.getElementById('newChatModal');
+  if (modal) {
+    modal.style.display = 'block';
+    document.getElementById('userSearchInput').focus();
+  }
+}
+
+// Hide new chat modal
+function hideNewChatModal() {
+  const modal = document.getElementById('newChatModal');
+  if (modal) {
+    modal.style.display = 'none';
+    document.getElementById('userSearchInput').value = '';
+    document.getElementById('searchResults').innerHTML = '';
+  }
+}
+
+// Search users for new conversation
+function searchUsers() {
+  const query = document.getElementById('userSearchInput').value.trim();
+  if (query.length < 2) {
+    document.getElementById('searchResults').innerHTML = '';
+    return;
+  }
+  
+  fetch(`fetch_messages.php?action=search_users&query=${encodeURIComponent(query)}&user_type=supervisor`)
+    .then(res => res.json())
+    .then(data => {
+      if (data.success) {
+        displaySearchResults(data.users);
+      }
+    })
+    .catch(() => showError('Error searching users'));
+}
+
+// Display search results
+function displaySearchResults(users) {
+  const container = document.getElementById('searchResults');
+  container.innerHTML = '';
+  
+  if (users.length === 0) {
+    container.innerHTML = '<div class="no-results">No users found</div>';
+    return;
+  }
+  
+  users.forEach(user => {
+    const div = document.createElement('div');
+    div.className = 'search-result-item';
+    div.innerHTML = `
+      <span class="user-name">${escapeHtml(user.name)}</span>
+      <span class="user-type">${user.type}</span>
+    `;
+    div.onclick = () => startNewConversation(user.type, user.id, user.name);
+    container.appendChild(div);
+  });
+}
+
+// Start new conversation
+function startNewConversation(type, id, name) {
+  hideNewChatModal();
+  selectConversation(type, id, name);
+}
+
+// Auto-refresh functionality
+function startAutoRefresh() {
+  // Refresh conversations every 30 seconds
+  conversationRefreshInterval = setInterval(loadConversations, 30000);
+  
+  // Refresh messages every 10 seconds if a conversation is selected
+  messageRefreshInterval = setInterval(() => {
+    if (currentConversation) {
+      loadMessages();
+    }
+  }, 10000);
+}
+
+function stopAutoRefresh() {
+  if (conversationRefreshInterval) {
+    clearInterval(conversationRefreshInterval);
+  }
+  if (messageRefreshInterval) {
+    clearInterval(messageRefreshInterval);
+  }
+}
+
+// Show chat area (for mobile responsiveness)
+function showChatArea() {
+  const chatArea = document.querySelector('.chat-area');
+  const conversationsList = document.querySelector('.conversations-list');
+  
+  if (window.innerWidth <= 768) {
+    conversationsList.classList.add('mobile-hidden');
+    chatArea.classList.remove('mobile-hidden');
+  }
+}
+
+// Show conversations list (for mobile)
+function showConversationsList() {
+  const chatArea = document.querySelector('.chat-area');
+  const conversationsList = document.querySelector('.conversations-list');
+  
+  if (window.innerWidth <= 768) {
+    conversationsList.classList.remove('mobile-hidden');
+    chatArea.classList.add('mobile-hidden');
+  }
+}
+
+// Utility functions
+function escapeHtml(text) {
+  const div = document.createElement('div');
+  div.textContent = text;
+  return div.innerHTML;
+}
+
+function getTimeAgo(dateString) {
+  const now = new Date();
+  const date = new Date(dateString);
+  const diffMs = now - date;
+  const diffMins = Math.floor(diffMs / 60000);
+  const diffHours = Math.floor(diffMs / 3600000);
+  const diffDays = Math.floor(diffMs / 86400000);
+  
+  if (diffMins < 1) return 'Just now';
+  if (diffMins < 60) return `${diffMins}m ago`;
+  if (diffHours < 24) return `${diffHours}h ago`;
+  if (diffDays < 7) return `${diffDays}d ago`;
+  return date.toLocaleDateString();
+}
+
+function debounce(func, wait) {
+  let timeout;
+  return function executedFunction(...args) {
+    const later = () => {
+      clearTimeout(timeout);
+      func(...args);
+    };
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+  };
+}
+
+function showError(message) {
+  console.error(message);
+  alert(message);
+}
+
+// Clean up when leaving messaging tab
+function cleanupMessaging() {
+  stopAutoRefresh();
+  currentConversation = null;
+}
+
+function showInternDetails(cardElement) {
+  const intern = JSON.parse(cardElement.dataset.intern);
+  const modal = document.getElementById('internDetailsModal');
+  const body = document.getElementById('internDetailsBody');
+  
+  // Basic HTML sanitation
+  // The escapeHtml function is now defined globally at the top of the script.
+  body.innerHTML = `
+    <div style="text-align: center;">
+      <img src="${escapeHtml(intern.profile_picture)}" alt="Profile Picture" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin-bottom: 15px;">
+      <h3>${escapeHtml(intern.firstname)} ${escapeHtml(intern.lastname)}</h3>
+    </div>
+    <p><strong>Student ID:</strong> ${escapeHtml(intern.studentid || 'N/A')}</p>
+    <p><strong>Email:</strong> ${escapeHtml(intern.email)}</p>
+    <p><strong>Contact:</strong> ${escapeHtml(intern.contact || 'N/A')}</p>
+    <p><strong>Post:</strong> ${escapeHtml(intern.post_name || 'N/A')}</p>
+    <p><a href="#" class="view-resume-btn" onclick='showResumeModal(${JSON.stringify(intern)})'>View Resume</a></p>
+  `;
+  
+  modal.style.display = 'block';
+}
+
+function closeInternDetailsModal() {
+  const modal = document.getElementById('internDetailsModal');
+  modal.style.display = 'none';
+}
+
+function showResumeModal(intern) {
+  const modal = document.getElementById('resumeModal');
+  const body = document.getElementById('resumeBody');
+  body.innerHTML = '<p>Loading resume...</p>';
+  modal.style.display = 'block';
+
+  // Fetch full resume
+  fetch(`fetch_full_resume.php?student_id=${intern.student_id}`)
+    .then(response => response.json())
+    .then(data => {
+      if (data.success) {
+        let html = `
+          <div class="resume-header">
+            <img src="${intern.profile_picture}" alt="Profile Picture">
+            <h3>${intern.firstname} ${intern.lastname}</h3>
+            <p>${intern.email} | ${intern.contact || 'N/A'}</p>
+          </div>
+        `;
+        html += '<h4>Resume Details</h4>';
+        html += `<p><strong>Objective:</strong> ${data.data.objective || 'N/A'}</p>`;
+
+        if (data.data.education && data.data.education.length > 0) {
+          html += '<h5>Education</h5>';
+          data.data.education.forEach(edu => {
+            html += `<p><strong>${edu.school_name}</strong> (${edu.start_year} - ${edu.end_year})<br>${edu.description}</p>`;
+          });
+        }
+
+        if (data.data.skills && data.data.skills.length > 0) {
+          html += '<h5>Skills</h5>';
+          html += '<ul>';
+          data.data.skills.forEach(skill => {
+            html += `<li>${skill.skill_name} - <em>${skill.proficiency}</em></li>`;
+          });
+        }
+
+        if (data.data.experience && data.data.experience.length > 0) {
+          html += '<h5>Work Experience</h5>';
+          data.data.experience.forEach(exp => {
+            html += `<p><strong>${exp.position}</strong> at ${exp.company_name} (${exp.start_date} - ${exp.end_date})<br>${exp.responsibilities}</p>`;
+          });
+        }
+
+        if (data.data.certifications && data.data.certifications.length > 0) {
+          html += '<h5>Certifications</h5>';
+          data.data.certifications.forEach(cert => {
+            html += `<p><strong>${cert.title}</strong> - ${cert.issuer} (${cert.date_obtained})<br>${cert.description}</p>`;
+          });
+        }
+
+        body.innerHTML = html;
+      } else {
+        body.innerHTML = `<p>${data.message || 'Error loading resume'}</p>`;
+      }
+    })
+    .catch(error => {
+      console.error('Error fetching resume:', error);
+      body.innerHTML = '<p>Error loading resume</p>';
+    });
+}
+
+function closeResumeModal() {
+  const modal = document.getElementById('resumeModal');
+  modal.style.display = 'none';
+}
+
+function searchInterns() {
+  const input = document.getElementById('internSearch');
+  const filter = input.value.toLowerCase();
+  const grid = document.querySelector('#internOverviewContent .interns-grid');
+  const cards = grid.getElementsByClassName('company-card');
+
+  for (let i = 0; i < cards.length; i++) {
+    const card = cards[i];
+    const name = card.dataset.name || '';
+    const studentid = card.dataset.studentid || '';
+    
+    if (name.includes(filter) || studentid.includes(filter)) {
+      card.style.display = "";
+    } else {
+      card.style.display = "none";
+    }
+  }
+}
+
+function searchPerformanceInterns() {
+  const input = document.getElementById('performanceSearch');
+  const filter = input.value.toLowerCase();
+  const grid = document.querySelector('#internPerformanceContent .interns-grid');
+  const cards = grid.getElementsByClassName('company-card');
+
+  for (let i = 0; i < cards.length; i++) {
+    const card = cards[i];
+    const name = card.dataset.name || '';
+    const studentid = card.dataset.studentid || '';
+
+    if (name.includes(filter) || studentid.includes(filter)) {
+      card.style.display = "";
+    } else {
+      card.style.display = "none";
+    }
+  }
+}
+
+// Close modal if user clicks outside of it
+window.addEventListener('click', function(event) {
+  const internDetailsModal = document.getElementById('internDetailsModal');
+  const resumeModal = document.getElementById('resumeModal');
+  if (event.target == internDetailsModal) {
+    internDetailsModal.style.display = "none";
+  }
+  if (event.target == resumeModal) {
+    resumeModal.style.display = "none";
+  }
+});
+
+function assignTask(studentId) {
+  showTab('assignTasksContent');
+  const studentSelect = document.getElementById('student_id');
+  if (studentSelect) {
+    studentSelect.value = studentId;
+  }
+}
+
+let currentStudentId = null;
+let currentTaskFilter = 'all';
+
+function viewTasks(studentId) {
+    currentStudentId = studentId;
+    const intern = <?php echo json_encode($interns); ?>.find(i => i.student_id == studentId);
+    if (intern) {
+        document.getElementById('internTasksTitle').textContent = `Tasks for ${intern.firstname} ${intern.lastname}`;
+    }
+    showTab('viewTasksContent');
+    filterTasks('all'); // Default to showing all tasks
+}
+
+function filterTasks(status) {
+    currentTaskFilter = status;
+    
+    // Update active button style
+    document.querySelectorAll('.task-filter-btn').forEach(btn => {
+        btn.classList.remove('active');
+    });
+    const activeButton = Array.from(document.querySelectorAll('.task-filter-btn')).find(btn => btn.textContent.toLowerCase() === status);
+    if (activeButton) {
+        activeButton.classList.add('active');
+    }
+
+    if (!currentStudentId) return;
+    const tasksContainer = document.getElementById('tasksListContainer');
+    tasksContainer.innerHTML = '<p>Loading tasks...</p>';
+
+    fetch(`fetch_supervisor_intern_tasks.php?student_id=${currentStudentId}&status=${status}`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                displayTasks(data.tasks);
+            } else {
+                tasksContainer.innerHTML = `<p>${data.message || 'Error loading tasks'}</p>`;
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching tasks:', error);
+            tasksContainer.innerHTML = '<p>Error loading tasks</p>';
+        });
+}
+
+function displayTasks(tasks) {
+    const tasksContainer = document.getElementById('tasksListContainer');
+
+    if (tasks.length === 0) {
+        tasksContainer.innerHTML = `<p>No tasks found for the selected filter.</p>`;
+        return;
+    }
+
+    let html = '';
+    tasks.forEach(task => {
+        const statusClass = task.status.toLowerCase();
+        const statusText = task.status.charAt(0).toUpperCase() + task.status.slice(1);
+
+        const parts = task.task_description.split('\\n\\n');
+        const title = escapeHtml(parts[0]);
+        const description = parts.length > 1 ? escapeHtml(parts.slice(1).join('\\n\\n')) : 'No description.';
+
+        let scoreControls = '';
+        if (task.status === 'submitted') {
+            scoreControls = `
+                <div class="score-section" style="margin-top: 10px;">
+                    <input type="number" id="score-${task.id}" class="score-input" min="0" max="100" placeholder="Score">
+                    <button class="submit-score-btn" onclick="submitScore(${task.id})">Submit Score</button>
+                </div>
+            `;
+        } else if (task.status === 'completed') {
+            scoreControls = `
+                <div class="score-section" style="margin-top: 10px;">
+                    <strong>Score: ${task.score}/100</strong>
+                </div>
+            `;
+        }
+
+        html += `
+            <div class="task-item ${statusClass}">
+                <div class="task-header">
+                    <h4>${title}</h4>
+                    <span class="task-status ${statusClass}">${statusText}</span>
+                </div>
+                <div class="task-details">
+                    <p>${description}</p>
+                    <p><strong>Due:</strong> ${new Date(task.due_date + 'T00:00:00').toLocaleDateString()}</p>
+                </div>
+                ${scoreControls}
+
+                <div class="attachments-section">
+                    <h5>Attachments</h5>
+                    <div id="attachment-display-${task.id}">
+                        ${task.attachment ? `
+                            <p><strong>File:</strong> ${escapeHtml(task.attachment.file_name)}</p>
+                            <a href="${escapeHtml(task.attachment.file_path)}" target="_blank" class="button">View/Download</a>
+                        ` : '<p>No file attached.</p>'}
+                    </div>
+                    <input type="file" id="file-upload-${task.id}" style="display: none;" onchange="uploadTaskAttachment(${task.id}, currentStudentId, this.files[0])">
+                    <button onclick="document.getElementById('file-upload-${task.id}').click()">Attach File</button>
+                </div>
+
+                <div class="comments-section">
+                    <h5 class="comments-header" onclick="toggleTaskComments(${task.id}, currentStudentId)">Comments <span id="comment-count-${task.id}">(${task.comments.length})</span></h5>
+                    <div class="comments-container" id="task-comments-container-${task.id}" style="display:none;">
+                        <div class="comments-list" id="task-comments-list-${task.id}">
+                            ${task.comments.map(comment => `
+                                <div class="comment">
+                                    <p><strong>${escapeHtml(comment.commenter_name || comment.user_role)}</strong> <span class="comment-date">${comment.commented_at}</span></p>
+                                    <p>${escapeHtml(comment.comment_text)}</p>
+                                </div>
+                            `).join('')}
+                            ${task.comments.length === 0 ? '<p>No comments yet.</p>' : ''}
+                        </div>
+                        <div class="comment-form">
+                            <textarea id="task-comment-text-${task.id}" placeholder="Add a comment..."></textarea>
+                            <button onclick="addTaskComment(${task.id}, currentStudentId, 'supervisor')">Post Comment</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+    });
+    tasksContainer.innerHTML = html;
+}
+
+function submitScore(taskId) {
+    const scoreInput = document.getElementById(`score-${taskId}`);
+    const score = scoreInput.value;
+
+    if (score === '' || score < 0 || score > 100) {
+        Swal.fire('Invalid Score', 'Please enter a score between 0 and 100.', 'error');
+        return;
+    }
+
+    const formData = new FormData();
+    formData.append('task_id', taskId);
+    formData.append('score', score);
+
+    fetch('submit_task_score.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            Swal.fire('Success', 'Score submitted successfully!', 'success').then(() => {
+                filterTasks(currentTaskFilter); // Refresh the task list
+            });
+        } else {
+            Swal.fire('Error', data.message || 'Failed to submit score.', 'error');
+        }
+    })
+    .catch(error => {
+        console.error('Error submitting score:', error);
+        Swal.fire('Error', 'An error occurred while submitting the score.', 'error');
+    });
+}
+
+function showProfile() {
+  showTab('profileContent');
+}
+
+function goHome() {
+  showTab('mainContent');
+}
+
+// Toggle sidebar for mobile
+function toggleSidebar() {
+  const sidebar = document.querySelector('.sidebar');
+  const hamburgerBtn = document.querySelector('.hamburger-btn');
+
+  sidebar.classList.toggle('mobile-open');
+  document.body.classList.toggle('sidebar-open');
+  hamburgerBtn.classList.toggle('active');
+
+  // Prevent body scroll when sidebar is open on mobile
+  if (sidebar.classList.contains('mobile-open')) {
+    document.body.style.overflow = 'hidden';
+  } else {
+    document.body.style.overflow = '';
+  }
+}
+
+// Close sidebar when clicking on sidebar links (mobile)
+function closeSidebarOnLinkClick() {
+  const sidebarLinks = document.querySelectorAll('.sidebar a');
+  sidebarLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      // Only close sidebar on mobile (when mobile-open class exists)
+      const sidebar = document.querySelector('.sidebar');
+      if (sidebar.classList.contains('mobile-open')) {
+        toggleSidebar();
+      }
+    });
+  });
+}
+
+// Profile edit functions
+function enableEdit(fieldId) {
+  const field = document.getElementById(fieldId);
+  field.disabled = false;
+  field.focus();
+  showActions();
+}
+
+function enablePassword() {
+  document.getElementById("passwordFields").style.display = "block";
+  document.getElementById("password_display").style.display = "none";
+  showActions();
+}
+
+function showActions() {
+  document.getElementById("actionButtons").style.display = "flex";
+}
+
+function cancelEdit() {
+  const form = document.getElementById("profileForm");
+  form.reset();
+
+  const inputs = form.querySelectorAll("input");
+  inputs.forEach((input) => {
+    if (input.type !== "hidden" && input.id !== "confirm_password") {
+      input.disabled = true;
+    }
+  });
+
+  document.getElementById("passwordFields").style.display = "none";
+  document.getElementById("password_display").style.display = "inline-block";
+  document.getElementById("actionButtons").style.display = "none";
+}
+
+function saveProfile() {
+  const form = document.getElementById("profileForm");
+  const formData = new FormData(form);
+  const newPassword = formData.get("password");
+  const confirmPassword = document.getElementById("confirm_password").value;
+
+  if (newPassword && newPassword !== confirmPassword) {
+    alert("Passwords do not match.");
+    return;
+  }
+
+  fetch("update_profile.php", {
+    method: "POST",
+    body: formData,
+  })
+    .then((res) => res.text())
+    .then((res) => {
+      alert("Profile updated successfully!");
+      location.reload();
+    })
+    .catch(() => {
+      alert("Error updating profile.");
+    });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  const dropdowns = document.querySelectorAll(".dropdown");
+
+  dropdowns.forEach(drop => {
+    const btn = drop.querySelector(".dropbtn");
+    btn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      drop.classList.toggle("active");
+      dropdowns.forEach(d => { if (d !== drop) d.classList.remove("active"); });
+    });
+  });
+
+  document.addEventListener("click", () => {
+    dropdowns.forEach(d => d.classList.remove("active"));
+  });
+
+  // Initialize sidebar link click handlers
+  closeSidebarOnLinkClick();
+
+  // Event listener for "Give Feedback" buttons
+  document.querySelectorAll('.give-feedback-btn').forEach(button => {
+      button.addEventListener('click', function(event) {
+          event.stopPropagation(); // Prevent triggering showInternDetails
+          const studentId = this.dataset.studentId;
+          const studentName = this.dataset.studentName;
+          openFeedbackModal(studentId, studentName);
+      });
+  });
+
+  // Handle feedback form submission
+  const feedbackForm = document.getElementById('feedbackForm');
+  if (feedbackForm) {
+      feedbackForm.addEventListener('submit', async function(e) {
+          e.preventDefault();
+
+          const formData = new FormData(this);
+          
+          try {
+              const response = await fetch('submit_feedback.php', { // This file was created earlier
+                  method: 'POST',
+                  body: formData
+              });
+              const result = await response.json();
+
+              if (result.success) {
+                  Swal.fire('Success', result.message, 'success').then(() => {
+                      closeFeedbackModal();
+                      location.reload(); // Reload to update button status
+                  });
+              } else {
+                  Swal.fire('Error', result.message, 'error');
+              }
+          } catch (error) {
+              console.error('Error submitting feedback:', error);
+              Swal.fire('Error', 'An unexpected error occurred while submitting feedback.', 'error');
+          }
+      });
+  }
+
+  // Assign Task Form Submission
+  const assignTaskForm = document.getElementById('assignTaskForm');
+  if (assignTaskForm) {
+    assignTaskForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const formData = new FormData(this);
+      fetch('assign_task.php', {
+        method: 'POST',
+        body: formData
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.success) {
+          Swal.fire({
+            icon: 'success',
+            title: 'Success!',
+            text: 'Task assigned successfully!',
+            confirmButtonText: 'OK'
+          }).then(() => {
+            assignTaskForm.reset();
+          });
+        } else {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error!',
+            text: data.message,
+            confirmButtonText: 'OK'
+          });
+        }
+      })
+      .catch(() => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error!',
+          text: 'An error occurred while assigning the task.',
+          confirmButtonText: 'OK'
+        });
+      });
+    });
+  }
+
+  // Animate progress circles
+  const interns = <?php echo json_encode($interns); ?>;
+  interns.forEach(intern => {
+    const attendanceCircle = document.getElementById(`attendance-circle-${intern.student_id}`);
+    const performanceCircle = document.getElementById(`performance-circle-${intern.student_id}`);
+    const performanceCirclePerf = document.getElementById(`performance-circle-perf-${intern.student_id}`);
+
+    if (attendanceCircle) {
+      const radius = attendanceCircle.r.baseVal.value;
+      const circumference = 2 * Math.PI * radius;
+      const attendancePercent = intern.attendance;
+
+      attendanceCircle.style.strokeDasharray = `${circumference} ${circumference}`;
+      attendanceCircle.style.strokeDashoffset = circumference;
+
+      const offset = circumference - (parseFloat(attendancePercent) / 100) * circumference;
+      attendanceCircle.style.strokeDashoffset = offset;
+    }
+
+    if (performanceCircle) {
+      const radius = performanceCircle.r.baseVal.value;
+      const circumference = 2 * Math.PI * radius;
+      const performancePercent = intern.performance;
+
+      performanceCircle.style.strokeDasharray = `${circumference} ${circumference}`;
+      performanceCircle.style.strokeDashoffset = circumference;
+
+      const offset = circumference - (parseFloat(performancePercent) / 100) * circumference;
+      performanceCircle.style.strokeDashoffset = offset;
+    }
+
+    if (performanceCirclePerf) {
+      const radius = performanceCirclePerf.r.baseVal.value;
+      const circumference = 2 * Math.PI * radius;
+      const performancePercent = intern.performance;
+
+      performanceCirclePerf.style.strokeDasharray = `${circumference} ${circumference}`;
+      performanceCirclePerf.style.strokeDashoffset = circumference;
+
+      const offset = circumference - (parseFloat(performancePercent) / 100) * circumference;
+      performanceCirclePerf.style.strokeDashoffset = offset;
+    }
+  });
+});
+
+let taskCommentIntervals = {}; // For task-specific comments
+
+function uploadTaskAttachment(taskId, studentId, file) {
+  if (!file) {
+    Swal.fire('Error', 'No file selected.', 'error');
+    return;
+  }
+
+  const formData = new FormData();
+  formData.append('task_id', taskId);
+  formData.append('student_id', studentId);
+  formData.append('attachment', file);
+
+  Swal.fire({
+    title: 'Uploading file...',
+    text: 'Please wait.',
+    allowOutsideClick: false,
+    didOpen: () => {
+      Swal.showLoading();
+    }
+  });
+
+  fetch('upload_task_attachment.php', {
+    method: 'POST',
+    body: formData
+  })
+  .then(response => response.json())
+  .then(data => {
+    Swal.close();
+    if (data.success) {
+      Swal.fire('Success', 'File uploaded successfully!', 'success');
+      // Update the attachment display for this specific task
+      const attachmentDisplay = document.getElementById(`attachment-display-${taskId}`);
+      attachmentDisplay.innerHTML = `
+        <p><strong>File:</strong> ${escapeHtml(data.file_name)}</p>
+        <a href="${escapeHtml(data.file_path)}" target="_blank" class="button">View/Download</a>
+      `;
+    } else {
+      Swal.fire('Error', data.message, 'error');
+    }
+  })
+  .catch(error => {
+    Swal.close();
+    console.error('Error uploading file:', error);
+    Swal.fire('Error', 'An error occurred while uploading the file.', 'error');
+  });
+}
+
+function toggleTaskComments(taskId, studentId) {
+  const container = document.getElementById(`task-comments-container-${taskId}`);
+  if (container.style.display === 'none') {
+    container.style.display = 'block';
+    loadTaskComments(taskId, studentId);
+    // Clear any existing interval for this task before setting a new one
+    if (taskCommentIntervals[taskId]) {
+      clearInterval(taskCommentIntervals[taskId]);
+    }
+    taskCommentIntervals[taskId] = setInterval(() => loadTaskComments(taskId, studentId), 5000); // Refresh every 5 seconds
+  } else {
+    container.style.display = 'none';
+    if (taskCommentIntervals[taskId]) {
+      clearInterval(taskCommentIntervals[taskId]);
+      delete taskCommentIntervals[taskId];
+    }
+  }
+}
+
+function loadTaskComments(taskId, studentId) {
+  fetch(`fetch_task_comments.php?task_id=${taskId}&student_id=${studentId}`)
+    .then(res => res.json())
+    .then(data => {
+      const list = document.getElementById(`task-comments-list-${taskId}`);
+      const commentCountSpan = document.getElementById(`comment-count-${taskId}`);
+      list.innerHTML = '';
+      if (data.success && data.comments.length > 0) {
+        data.comments.forEach(comment => {
+          const commentDiv = document.createElement('div');
+          commentDiv.className = 'comment';
+          commentDiv.innerHTML = `
+            <p><strong>${escapeHtml(comment.commenter_name || comment.user_role)}</strong> <span class="comment-date">${comment.commented_at}</span></p>
+            <p>${escapeHtml(comment.comment_text)}</p>
+          `;
+          list.appendChild(commentDiv);
+        });
+        commentCountSpan.textContent = `(${data.comments.length})`;
+      } else {
+        list.innerHTML = '<p>No comments yet.</p>';
+        commentCountSpan.textContent = '(0)';
+      }
+    })
+    .catch(error => {
+      console.error('Error loading task comments:', error);
+      const list = document.getElementById(`task-comments-list-${taskId}`);
+      list.innerHTML = '<p>Error loading comments.</p>';
+    });
+}
+
+function addTaskComment(taskId, studentId, userRole) {
+  const commentTextarea = document.getElementById(`task-comment-text-${taskId}`);
+  const commentText = commentTextarea.value.trim();
+
+  if (!commentText) {
+    Swal.fire('Error', 'Comment cannot be empty.', 'error');
+    return;
+  }
+
+  const formData = new FormData();
+  formData.append('task_id', taskId);
+  formData.append('student_id', studentId); // Assuming student_id is needed for context
+  formData.append('user_id', currentUserId); // Current supervisor user ID
+  formData.append('user_role', userRole);
+  formData.append('comment_text', commentText);
+
+  fetch('add_task_comment.php', {
+    method: 'POST',
+    body: formData
+  })
+  .then(res => res.json())
+  .then(data => {
+    if (data.success) {
+      commentTextarea.value = '';
+      loadTaskComments(taskId, studentId); // Reload comments for this task
+    } else {
+      Swal.fire('Error', data.message, 'error');
+    }
+  })
+  .catch(error => {
+    console.error('Error posting comment:', error);
+    Swal.fire('Error', 'An error occurred while posting the comment.', 'error');
+  });
+}
+</script>
+<style>
+  /* General styling for task cards */
+  .tasks-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+  }
+
+  .task-item {
+    background: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .task-item .task-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  .task-item h4 {
+    margin: 0;
+    color: #116530;
+    font-size: 1.2rem;
+  }
+
+  .task-item .task-status {
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+
+  .task-item .task-details p {
+    margin: 5px 0;
+    font-size: 0.9rem;
+    color: #555;
+  }
+
+  .task-item .button, .task-item button {
+    background-color: #116530;
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 0.9rem;
+    transition: background-color 0.3s ease;
+  }
+
+  .task-item .button:hover, .task-item button:hover {
+    background-color: #0e5128;
+  }
+
+  /* Attachments Section */
+  .attachments-section {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+  }
+
+  .attachments-section h5 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: #116530;
+    font-size: 1rem;
+  }
+
+  .attachments-section p {
+    margin: 5px 0;
+    font-size: 0.9rem;
+  }
+
+  /* Comments Section */
+  .comments-section {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+  }
+
+  .comments-section h5.comments-header {
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: #116530;
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .comments-section .comments-container {
+    background: #f9f9f9;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    padding: 10px;
+    max-height: 200px;
+    overflow-y: auto;
+  }
+
+  .comments-section .comments-list {
+    margin-bottom: 10px;
+  }
+
+  .comments-section .comment {
+    border-bottom: 1px solid #e0e0e0;
+    padding: 8px 0;
+  }
+
+  .comments-section .comment:last-child {
+    border-bottom: none;
+  }
+
+  .comments-section .comment p {
+    margin: 0;
+    font-size: 0.85rem;
+    color: #333;
+  }
+
+  .comments-section .comment .comment-date {
+    font-size: 0.75rem;
+    color: #888;
+    margin-left: 5px;
+  }
+
+  .comments-section .comment-form textarea {
+    width: calc(100% - 10px);
+    min-height: 60px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 5px;
+    margin-bottom: 5px;
+    resize: vertical;
+  }
+
+  .comments-section .comment-form button {
+    width: 100%;
+    padding: 8px;
+    background-color: #116530;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+  }
+
+  .comments-section .comment-form button:hover {
+    background-color: #0e5128;
+  }
+</style>
+</body>
+</html>
+</content>
